@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Login.scss";
+import { ILoginForm } from "../../interfaces/user";
 
 const Login = () => {
+  const [loginForm,setLoginForm] = useState<ILoginForm>({username:"", password: ""});
+
   return (
     <div className="page">
       <div className="cover">
