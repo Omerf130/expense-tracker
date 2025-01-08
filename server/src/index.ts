@@ -3,7 +3,6 @@ import dotenv from "dotenv";
 import cors from "cors";
 import expenseRoutes from "./routes/Expense";
 import userRoutes from "./routes/Users";
-import mongoose from "mongoose";
 import { mongooseConnect } from "./db/db";
 
 dotenv.config();
