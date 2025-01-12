@@ -2,7 +2,22 @@ import { NextFunction, Request, Response } from "express";
 import { Expense } from "../db/schemas/Expense";
 
 export const getAllExpenses = async (req:Request, res:Response) => {
-  console.log("get request succeded")
+   try {
+      const list = await Expense.find();
+      res.status(200).json({message:"All expenses recieved successfully!", list});
+   } catch (error) {
+      res.status(400).json({message:error});
+   }
+}
+
+export const getExpenseById = async (req:Request, res:Response) => {
+   const {id} = req.params;
+   try {
+      const expense = await Expense.find({_id: id}); 
+      res.status(200).json({message:"expense recived successfullt!", expense});     
+   } catch (error) {
+      res.status(400).json({message:error});
+   }
 }
 
 export const createExpense = async (req:Request, res:Response) => {
@@ -17,9 +32,26 @@ export const createExpense = async (req:Request, res:Response) => {
 }
 
 export const deleteExpenseById = async (req:Request, res:Response) => {
-   console.log("delete request succeded")
+   const {id} = req.params;
+   try {
+      const deleteExpense = await Expense.findByIdAndDelete(id);
+      if(!deleteExpense) {
+         res.status(404).json({message:"expense not found"});
+         return;
+      };
+      res.status(200).json({message:"expense is deleted", expense:deleteExpense});
+   } catch (error) {
+      res.status(400).json({message:error})
+   }
 }
 
 export const updateExpenseById = async (req:Request, res:Response) => {
-   console.log("put request succeded")
+   const{id} = req.params;
+   try {
+      const updateExpense = await Expense.findByIdAndUpdate(id, {...req.body})
+      res.status(200).json({message:"expense update succssefuly", expense: updateExpense})
+      
+   } catch (error) {
+      res.status(400).json({message:error})
+   }
 }
