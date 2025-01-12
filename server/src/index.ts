@@ -4,6 +4,8 @@ import cors from "cors";
 import expenseRoutes from "./routes/Expense";
 import userRoutes from "./routes/Users";
 import { mongooseConnect } from "./db/db";
+import morgan from "morgan";
+import cookieParser from "cookie-parser";
 
 dotenv.config();
 const PORT = process.env.PORT;
@@ -11,6 +13,8 @@ const PORT = process.env.PORT;
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use(morgan("dev"));
+app.use(cookieParser());
 
 app.use("/api/expenses", expenseRoutes);
 app.use("/api/users", userRoutes);
