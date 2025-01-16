@@ -10,6 +10,7 @@ import { TTheme } from "../../interfaces/global";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { useEffect, useState } from "react";
+import { GiMoneyStack } from "react-icons/gi";
 
 interface NavProps {
   theme: TTheme;
@@ -17,7 +18,7 @@ interface NavProps {
 }
 
 const Nav = ({ onToggleTheme, theme }: NavProps) => {
-  const { LINK_HOME, LINK_LOGIN, LINK_REGISTER, NAV_LOGO } = CONSTS.NAV;
+  const { LINK_HOME, LINK_LOGIN, LINK_REGISTER, NAV_LOGO, LINK_MY_EXPENSES } = CONSTS.NAV;
   const [isMainNavOpen, setIsMainNavOpen] = useState(window.innerWidth > 768);
 
   useEffect(() => {
@@ -85,6 +86,15 @@ const Nav = ({ onToggleTheme, theme }: NavProps) => {
           >
             <SiGnuprivacyguard fontSize={24} />
             <span> {LINK_REGISTER}</span>
+          </NavLink>
+          <NavLink
+            to="/myExpenses"
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
+            <GiMoneyStack fontSize={24} />
+            <span> {LINK_MY_EXPENSES}</span>
           </NavLink>
         </div>
       </div>

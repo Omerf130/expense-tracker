@@ -14,6 +14,6 @@ export interface IUser extends IUserForm{
 }
 
 export interface IUserLoginForm {
-  email:string
+  userName:string
   password:string
 }

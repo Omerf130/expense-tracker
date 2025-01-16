@@ -7,6 +7,7 @@ export interface IExpenseForm {
 
 export type ExpenseType = "INCOME" | "EXPENSE";
 
+
 export interface IExpense extends IExpenseForm {
   _id:string
   createdAt: Date

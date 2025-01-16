@@ -1,9 +1,6 @@
-* {
-  margin: 0;
-  box-sizing: border-box;
-}
+@use '../../styles//variables' as *;
 
-.page {
+.registerePage {
   height: 100vh;
   width: 100%;
   display: flex;
@@ -12,14 +9,26 @@
   .cover {
     background-color: white;
     width: 30em;
-    height: 35em;
+    padding: 40px 0;
     position: relative;
     border-radius: 1em;
     box-shadow: 0 0.188em 1.55em rgb(156, 156, 156);
     display: flex;
+    gap: 15px;
     flex-direction: column;
     align-items: center;
     justify-content: space-around;
+
+    h1 {
+      margin-bottom: 15px;
+    }
+
+    .inputsWrapper {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      width: 80%;
+    }
 
     input {
       border: none;
@@ -31,24 +40,25 @@
       padding: 2em;
     }
 
-    input:focus {
-      outline-color: rgb(32, 177, 255);
-    }
-
     .signup-btn {
       width: 40%;
       height: 3em;
-      background-color: rgb(32, 177, 255);
+      background-color: $btn-color;
+      color: $primary-color;
       display: flex;
+      font-weight: bold;
       justify-content: center;
       align-items: center;
       transition: 0.5s;
       border-radius: 0.25em;
+      margin-top: 20px;
+      outline: none;
+      border: none;
       cursor: pointer;
     }
 
     .signup-btn:hover {
-      background-color: rgb(16, 149, 232);
+      background-color: $dark-background-second;
     }
 
     .text {
@@ -66,20 +76,9 @@
         width: 45%;
         height: 90%;
         border-radius: 0.25em;
-        background-color: gray;
-        background-image: url("../img/images.jpg");
-        background-position: center;
-        background-size: contain;
-        background-repeat: no-repeat;
-        cursor: pointer;
-      }
-    
-      .facebook {
-        width: 45%;
-        height: 90%;
-        border-radius: 0.25em;
-        background-color: gray;
-        background-image: url("../img/Facebook-logo.png");
+        border: $border;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+        background-image: url("../img/google.webp");
         background-position: center;
         background-size: contain;
         background-repeat: no-repeat;
@@ -87,4 +86,9 @@
       }
     }  
   }
+  .dark & {
+    h1 {
+      color: $dark-background;
+    }
+  } 
 }

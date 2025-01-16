@@ -3,6 +3,7 @@ export const CONSTS = {
     LINK_HOME: "Home",
     LINK_LOGIN: "Login",
     LINK_REGISTER: "Register",
-    NAV_LOGO: "Expense Tracker" 
+    NAV_LOGO: "Expense Tracker", 
+    LINK_MY_EXPENSES: "My Expenses"
   }
 }

@@ -33,14 +33,14 @@ export const register = async (req:Request, res:Response) => {
 }
 
 export const login = async (req:Request, res:Response): Promise<void> => {
-   const { email, password } = req.body as IUserLoginForm;
-   if(!email || !password) {
-      res.status(400).json({message:"email and password required"});
+   const { userName, password } = req.body as IUserLoginForm;
+   if(!userName || !password) {
+      res.status(400).json({message:"userName and password required"});
       return;
    }
 
    try {
-      const user = await User.findOne({email});
+      const user = await User.findOne({userName});
       if(!user) {
          res.status(404).json({message: "user not exist"});
          return;

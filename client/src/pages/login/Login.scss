@@ -1,7 +1,4 @@
-* {
-  margin: 0;
-  box-sizing: border-box;
-}
+@use '../../styles//variables' as *;
 
 .page {
   height: 100vh;
@@ -31,24 +28,24 @@
       padding: 2em;
     }
 
-    input:focus {
-      outline-color: rgb(32, 177, 255);
-    }
-
     .login-btn {
       width: 40%;
       height: 3em;
-      background-color: rgb(32, 177, 255);
+      background-color: $btn-color;
+      color: $primary-color;
       display: flex;
+      font-weight: bold;
       justify-content: center;
       align-items: center;
       transition: 0.5s;
       border-radius: 0.25em;
+      outline: none;
+      border: none;
       cursor: pointer;
     }
 
     .login-btn:hover {
-      background-color: rgb(16, 149, 232);
+      background-color: $dark-background-second;
     }
 
     .text {
@@ -66,25 +63,20 @@
         width: 45%;
         height: 90%;
         border-radius: 0.25em;
-        background-color: gray;
-        background-image: url("../img/images.jpg");
+        border: $border;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+        background-image: url("../img/google.webp");
         background-position: center;
         background-size: contain;
         background-repeat: no-repeat;
         cursor: pointer;
       }
     
-      .facebook {
-        width: 45%;
-        height: 90%;
-        border-radius: 0.25em;
-        background-color: gray;
-        background-image: url("../img/Facebook-logo.png");
-        background-position: center;
-        background-size: contain;
-        background-repeat: no-repeat;
-        cursor: pointer;
-      }
     }  
   }
+  .dark & {
+    h1 {
+      color: $dark-background;
+    }
+  } 
 }
