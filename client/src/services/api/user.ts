@@ -13,7 +13,7 @@ export const registerUser = async (registerForm: IRegisterForm) => {
 
 export const loginUser = async (loginForm: ILoginForm) => {
   try {
-    return await axios.post(`${BASE_URL}/login`, loginForm);
+    return await axios.post(`${BASE_URL}/login`, loginForm,{withCredentials: true});
   } catch (error) {
     console.error(error);
   }

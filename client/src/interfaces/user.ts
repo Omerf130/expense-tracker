@@ -9,3 +9,10 @@ export interface IRegisterForm extends ILoginForm {
   email:string
   image:string
 }
+
+export interface IUserPayload {
+  _id: string
+  role: TRole
+}
+
+export type TRole = "Basic" | "Admin";

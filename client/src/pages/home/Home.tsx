@@ -2,8 +2,13 @@ import React from "react";
 import "./Home.scss";
 import img from "../img/financial-crime-and-bribe-concept-human-hands-giving-and-taking-money-bribe-doing-corruption-over-blue-background-illustration-vector.jpg";
 import img2 from "../img/original-defd5410841e3d97fd129d8c83ae8eef.png";
+import { useOutletContext } from "react-router";
+import { OutletContext } from "../../interfaces/global";
 
 const Home = () => {
+  const { auth, setAuth } = useOutletContext<OutletContext>();
+
+  console.log(auth)
   return (
     <div className="home-page">
       <h1>Manage Your Expense</h1>
