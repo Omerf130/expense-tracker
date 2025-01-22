@@ -3,7 +3,6 @@ import { IUserForm, IUserLoginForm } from "../types/users";
 import { User } from "../db/schemas/Users";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-import crypto from "crypto";
 
 
 export const getAllUsers = (req:Request, res:Response) => {
@@ -52,9 +51,9 @@ export const login = async (req:Request, res:Response): Promise<void> => {
          return;
       }
 
-      const secret = crypto.randomBytes(32).toString("hex");
+      // const secret = crypto.randomBytes(32).toString("hex");
 
-      const token =  jwt.sign({_id:user._id, role:"basic"}, secret, {expiresIn:"3d"});
+      const token =  jwt.sign({_id:user._id, role:"basic"}, "dsajdjksadkjsahdas", {expiresIn:"3d"});
 
       res.cookie("authToken", token, {
          httpOnly: false,

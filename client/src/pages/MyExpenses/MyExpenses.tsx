@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ExpenseType, IExpenseForm } from "../../interfaces/expense";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import "./MyExpenses.scss";
+import { createExpense } from "../../services/api/expenses";
 
 const MyExpenses = () => {
   const initialState: IExpenseForm = {
@@ -12,9 +13,14 @@ const MyExpenses = () => {
   };
   const [expenseForm, setExpenseForm] = useState<IExpenseForm>(initialState);
   const [isFormOpen, setIsFormOpen] = useState(false);
-  const onSubmit = (e:React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(expenseForm);
+    try {
+      await createExpense(expenseForm) 
+      
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const onRadioInputChange = (e:React.ChangeEvent<HTMLInputElement>) => {

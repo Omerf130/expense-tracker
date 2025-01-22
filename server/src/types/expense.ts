@@ -3,6 +3,7 @@ export interface IExpenseForm {
   category: string
   amount: number
   expenseType: ExpenseType
+  userId: string
 }
 
 export type ExpenseType = "INCOME" | "EXPENSE";
