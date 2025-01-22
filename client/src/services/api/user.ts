@@ -18,3 +18,11 @@ export const loginUser = async (loginForm: ILoginForm) => {
     console.error(error);
   }
 }
+
+export const logoutUser = async () => {
+  try {
+    return await axios.post(`${BASE_URL}/logout`, null, {withCredentials: true});
+  } catch (error) {
+    console.error(error);
+  }
+}

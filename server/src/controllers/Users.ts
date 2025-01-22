@@ -67,6 +67,18 @@ export const login = async (req:Request, res:Response): Promise<void> => {
       res.status(400).json({message: error});
    }
 }
+export const logout = (req:Request, res:Response) => {
+   try {
+      res.clearCookie("authToken", {
+         httpOnly: false,
+         secure: false,
+         sameSite: "strict",
+         maxAge: 24 * 60 * 60 *1000, 
+      }).status(200).json({message:"User loged out successfully"})
+   } catch (error) {
+      res.status(400).json({message: error});
+   }
+}
 export const deleteUserById = (req:Request, res:Response) => {
    console.log("delete request succeded")
 }

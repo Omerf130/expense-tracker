@@ -2,11 +2,12 @@ import './App.scss'
 import { Outlet } from 'react-router'
 import Nav from './components/nav/Nav'
 import { useState } from 'react'
-import { IAuth, TTheme } from './interfaces/global';
+import { TTheme } from './interfaces/global';
+import useAuth from './hooks/useAuth';
 
 function App() {
   const [theme, setTheme] = useState<TTheme>("light");
-  const [auth, setAuth] = useState<IAuth>({ token: null, userPayload: null });
+  const { auth, setAuth } = useAuth();
 
   const onToggleTheme = (theme: TTheme) => {
     setTheme(theme);
@@ -14,7 +15,7 @@ function App() {
 
   return (
     <div className={`app ${theme}`}>
-      <Nav onToggleTheme={onToggleTheme} theme={theme}/>
+      <Nav onToggleTheme={onToggleTheme} theme={theme} auth={auth} setAuth={setAuth}/>
       <Outlet context={{ auth, setAuth }}/>
     </div>
   )
