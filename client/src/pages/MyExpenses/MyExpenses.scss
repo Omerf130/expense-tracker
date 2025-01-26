@@ -86,5 +86,37 @@
     }
   }
   .my-expense-list {
+    border: 2px solid $btn-color-light;
+    width: 60%;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+    display: flex;
+    gap: 15px;
+    flex-direction: column;
+    .my-expense-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 0;
+      border-bottom: 1px solid #777;
+      .item-title {
+      }
+      .item-category {
+      }
+      .item-btns {
+        display: flex;
+        gap: 20px;
+        .btn {
+          cursor: pointer;
+          font-size: 24px;
+
+        }
+        .btn-edit {
+        }
+        .btn-delete {
+        }
+      }
+    }
   }
 }

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { ExpenseType, IExpenseForm } from "../../interfaces/expense";
 import { IoMdAddCircleOutline } from "react-icons/io";
-import "./MyExpenses.scss";
 import { createExpense, getAllExpenses } from "../../services/api/expenses";
 import { useOutletContext } from "react-router";
 import { OutletContext } from "../../interfaces/global";
+import "./MyExpenses.scss";
+import MyExpensesList from "./components/MyExpensesList";
+import Loader from "../../components/loader/Loader";
 
 const MyExpenses = () => {
   const initialState: IExpenseForm = {
@@ -17,13 +19,11 @@ const MyExpenses = () => {
   const [isFormOpen, setIsFormOpen] = useState(false);
   const { expenses, setExpenses } = useOutletContext<OutletContext>();
 
-
   const onSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       await createExpense(expenseForm) 
       await updateList();
-      
     } catch (error) {
       console.log(error)
     }
@@ -100,7 +100,11 @@ const MyExpenses = () => {
           </button>
         )}
       </>
-      <div className="my-expense-list">list</div>
+      {expenses ?
+      <MyExpensesList expenses={expenses}/>
+      :
+      <Loader/>
+      }
     </div>
   );
 };
