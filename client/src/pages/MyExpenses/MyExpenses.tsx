@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ExpenseType, IExpenseForm } from "../../interfaces/expense";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import "./MyExpenses.scss";
-import { createExpense } from "../../services/api/expenses";
+import { createExpense, getAllExpenses } from "../../services/api/expenses";
+import { useOutletContext } from "react-router";
+import { OutletContext } from "../../interfaces/global";
 
 const MyExpenses = () => {
   const initialState: IExpenseForm = {
@@ -13,10 +15,14 @@ const MyExpenses = () => {
   };
   const [expenseForm, setExpenseForm] = useState<IExpenseForm>(initialState);
   const [isFormOpen, setIsFormOpen] = useState(false);
+  const { expenses, setExpenses } = useOutletContext<OutletContext>();
+
+
   const onSubmit = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
       await createExpense(expenseForm) 
+      await updateList();
       
     } catch (error) {
       console.log(error)
@@ -27,6 +33,21 @@ const MyExpenses = () => {
     setExpenseForm((prev) => ({...prev, expenseType: e.target.value as ExpenseType}));
   }
 
+  useEffect(() => {
+    updateList();
+  },[])
+
+  const updateList = async () => {
+    try {
+      const data =  await getAllExpenses();
+     data && setExpenses([...data.list]);
+
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  console.log(expenses)
 
   return (
     <div className="my-expense-container">

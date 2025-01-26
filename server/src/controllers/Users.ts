@@ -51,8 +51,6 @@ export const login = async (req:Request, res:Response): Promise<void> => {
          return;
       }
 
-      // const secret = crypto.randomBytes(32).toString("hex");
-
       const token =  jwt.sign({_id:user._id, role:"basic"}, "dsajdjksadkjsahdas", {expiresIn:"3d"});
 
       res.cookie("authToken", token, {

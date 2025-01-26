@@ -12,4 +12,10 @@ export interface IExpense extends IExpenseForm {
   _id:string
   createdAt: Date
   updatedAt: Date
+  userId: string
+}
+
+export interface IExpenseResponse {
+  message: string
+  list: IExpense[]
 }

@@ -1,3 +1,4 @@
+import { IExpense } from "./expense";
 import { IUserPayload } from "./user";
 
 export type TTheme = "light" | "dark";
@@ -11,4 +12,6 @@ export interface IAuth {
 export interface OutletContext {
   auth: IAuth
   setAuth: React.Dispatch<React.SetStateAction<IAuth>>
+  expenses: IExpense[] | null
+  setExpenses: React.Dispatch<React.SetStateAction<IExpense[] | null>>
 }

@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import "./Login.scss";
-import { ILoginForm, IUserPayload } from "../../interfaces/user";
+import { ILoginForm } from "../../interfaces/user";
 import { loginUser } from "../../services/api/user";
 import { useNavigate, useOutletContext } from "react-router";
 import { OutletContext } from "../../interfaces/global";
-import Cookies from "js-cookie";
-import { jwtDecode } from "jwt-decode";
 import { getTokenAndPayload } from "../../utils/utils";
 
 const Login = () => {
