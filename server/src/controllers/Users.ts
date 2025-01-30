@@ -5,8 +5,17 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 
-export const getAllUsers = (req:Request, res:Response) => {
+export const getAllUsers = async(req:Request, res:Response) => {
   console.log("get request succeded")
+}
+export const getUserById = async(req:Request, res:Response) => {
+   const {id} = req.params;
+   try {
+      const user = await User.findById(id);
+      res.status(200).json({message:"user recieved successfully", user});
+   } catch (error) {
+      res.status(400).json({message: error})
+   }
 }
 export const register = async (req:Request, res:Response) => {
    const {password,email} = req.body as IUserForm;
@@ -64,7 +73,7 @@ export const login = async (req:Request, res:Response): Promise<void> => {
       res.status(400).json({message: error});
    }
 }
-export const logout = (req:Request, res:Response) => {
+export const logout = async(req:Request, res:Response) => {
    try {
       res.clearCookie("authToken", {
          httpOnly: false,
@@ -76,9 +85,9 @@ export const logout = (req:Request, res:Response) => {
       res.status(400).json({message: error});
    }
 }
-export const deleteUserById = (req:Request, res:Response) => {
+export const deleteUserById = async(req:Request, res:Response) => {
    console.log("delete request succeded")
 }
-export const updateUserById = (req:Request, res:Response) => {
+export const updateUserById = async(req:Request, res:Response) => {
    console.log("put request succeded")
 }

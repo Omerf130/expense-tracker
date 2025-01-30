@@ -11,13 +11,15 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { useEffect, useState } from "react";
 import { GiMoneyStack } from "react-icons/gi";
-import { logoutUser } from "../../services/api/user";
+import { logoutUser, getUserById } from "../../services/api/user";
+import Avatar from "./Avatar";
+import { IRegisterForm } from "../../interfaces/user";
 
 interface NavProps {
   theme: TTheme;
   onToggleTheme: (theme: TTheme) => void;
   auth: IAuth;
-  setAuth: React.Dispatch<React.SetStateAction<IAuth>>
+  setAuth: React.Dispatch<React.SetStateAction<IAuth>>;
 }
 
 const Nav = ({ onToggleTheme, theme, auth, setAuth }: NavProps) => {
@@ -30,6 +32,7 @@ const Nav = ({ onToggleTheme, theme, auth, setAuth }: NavProps) => {
     LINK_LOGOUT,
   } = CONSTS.NAV;
   const [isMainNavOpen, setIsMainNavOpen] = useState(window.innerWidth > 768);
+  const [userDetails, setUserDetails] = useState<IRegisterForm | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -45,15 +48,31 @@ const Nav = ({ onToggleTheme, theme, auth, setAuth }: NavProps) => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
+
   }, []);
+
+  useEffect(() => {
+    if (auth?.userPayload?._id) {
+      handleGetUser(auth.userPayload._id);
+    }
+  }, [auth]);
 
   const onLogout = async () => {
     try {
       await logoutUser();
-      setAuth({ token: null, userPayload: null })
+      setAuth({ token: null, userPayload: null });
       navigate("/");
     } catch (error) {
       console.log(error);
+    }
+  };
+
+  const handleGetUser = async (id: string) => {
+    try {
+        const data = await getUserById(id);
+        data && setUserDetails(data.user);
+    } catch (error) {
+      console.log(error)
     }
   };
 
@@ -82,6 +101,8 @@ const Nav = ({ onToggleTheme, theme, auth, setAuth }: NavProps) => {
         <div className="nav-links">
           {auth.token ? (
             <>
+              {userDetails && <Avatar userDetails={userDetails}/>}
+
               <NavLink
                 to="/myExpenses"
                 className={({ isActive }) =>
@@ -91,7 +112,7 @@ const Nav = ({ onToggleTheme, theme, auth, setAuth }: NavProps) => {
                 <GiMoneyStack fontSize={24} />
                 <span> {LINK_MY_EXPENSES}</span>
               </NavLink>
-             
+
               <button onClick={onLogout}>
                 <GiMoneyStack fontSize={24} />
                 <span> {LINK_LOGOUT}</span>

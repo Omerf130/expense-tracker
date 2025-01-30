@@ -6,9 +6,7 @@ import { useOutletContext } from "react-router";
 import { OutletContext } from "../../interfaces/global";
 
 const Home = () => {
-  const { auth, setAuth } = useOutletContext<OutletContext>();
 
-  console.log(auth)
   return (
     <div className="home-page">
       <h1>Manage Your Expense</h1>

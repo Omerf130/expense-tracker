@@ -38,15 +38,19 @@ export const createExpense = async (req:AuthRequest, res:Response) => {
    }
 }
 
-export const deleteExpenseById = async (req:Request, res:Response) => {
+export const deleteExpenseById = async (req:AuthRequest, res:Response) => {
    const {id} = req.params;
+   const userId = req.userId;
+
    try {
       const deleteExpense = await Expense.findByIdAndDelete(id);
+      const list = await Expense.find({userId});
+
       if(!deleteExpense) {
          res.status(404).json({message:"expense not found"});
          return;
       };
-      res.status(200).json({message:"expense is deleted", expense:deleteExpense});
+      res.status(200).json({message:"expense is deleted", list});
    } catch (error) {
       res.status(400).json({message:error})
    }

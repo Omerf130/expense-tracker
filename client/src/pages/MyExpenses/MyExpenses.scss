@@ -109,12 +109,19 @@
         gap: 20px;
         .btn {
           cursor: pointer;
-          font-size: 24px;
+          font-size: 20px;
+          border-radius: 6px;
+          border: 1px solid #777;
+          padding: 2px 8px;
 
         }
         .btn-edit {
+          background-color: rgb(92, 177, 237);
+          color: blue;
         }
         .btn-delete {
+          background-color: rgb(239, 80, 101);
+          color: rgb(131, 3, 3);
         }
       }
     }

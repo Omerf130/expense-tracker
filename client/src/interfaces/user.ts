@@ -15,4 +15,9 @@ export interface IUserPayload {
   role: TRole
 }
 
+export interface IUserResponse {
+  message: string
+  user: IRegisterForm
+}
+
 export type TRole = "Basic" | "Admin";
