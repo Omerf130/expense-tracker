@@ -6,7 +6,6 @@ interface IAvatarProps {
 
 const Avatar = ({userDetails}: IAvatarProps) => {
 
-  console.log(userDetails)
   return (
     <div className="avatar-container">
       <div className="avatar-image">

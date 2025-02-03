@@ -6,7 +6,7 @@ export interface IExpenseForm {
   userId: string
 }
 
-export type ExpenseType = "INCOME" | "EXPENSE";
+export type ExpenseType = "INCOME" | "EXPENSE" | "INVESTMENT" | "SAVINGS";
 
 export interface IExpense extends IExpenseForm {
   _id:string

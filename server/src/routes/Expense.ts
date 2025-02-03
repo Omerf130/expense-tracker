@@ -8,6 +8,6 @@ router.get("/",requireAuth, getAllExpenses);
 router.get("/:id",requireAuth ,getExpenseById);
 router.post("/",requireAuth, createExpense);
 router.delete("/:id",requireAuth, deleteExpenseById);
-router.put("/:id", updateExpenseById);
+router.put("/:id",requireAuth, updateExpenseById);
 
 export default router;

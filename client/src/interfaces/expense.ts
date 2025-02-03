@@ -5,7 +5,7 @@ export interface IExpenseForm {
   expenseType: ExpenseType
 }
 
-export type ExpenseType = "INCOME" | "EXPENSE";
+export type ExpenseType = "INCOME" | "EXPENSE" | "INVESTMENT" | "SAVINGS";
 
 
 export interface IExpense extends IExpenseForm {
@@ -18,4 +18,9 @@ export interface IExpense extends IExpenseForm {
 export interface IExpenseResponse {
   message: string
   list: IExpense[]
+}
+
+export interface ISingleExpenseResponse {
+  message: string
+  expense: IExpense
 }

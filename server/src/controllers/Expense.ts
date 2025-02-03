@@ -19,7 +19,7 @@ export const getAllExpenses = async (req:AuthRequest, res:Response) => {
 export const getExpenseById = async (req:Request, res:Response) => {
    const {id} = req.params;
    try {
-      const expense = await Expense.find({_id: id}); 
+      const expense = await Expense.findById(id); 
       res.status(200).json({message:"expense recived successfullt!", expense});     
    } catch (error) {
       res.status(400).json({message:error});
@@ -56,11 +56,18 @@ export const deleteExpenseById = async (req:AuthRequest, res:Response) => {
    }
 }
 
-export const updateExpenseById = async (req:Request, res:Response) => {
+export const updateExpenseById = async (req:AuthRequest, res:Response) => {
    const{id} = req.params;
+   const userId = req.userId;
+
    try {
-      const updateExpense = await Expense.findByIdAndUpdate(id, {...req.body})
-      res.status(200).json({message:"expense update succssefuly", expense: updateExpense})
+      const updateExpense = await Expense.findByIdAndUpdate(id, {...req.body});
+      if(!updateExpense) {
+         res.status(404).json({message:"expense not found"});
+         return;
+      };
+      const list = await Expense.find({userId});
+      res.status(200).json({message:"expense update succssefuly", list})
       
    } catch (error) {
       res.status(400).json({message:error})
