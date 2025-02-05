@@ -100,10 +100,22 @@
       justify-content: space-between;
       padding: 15px 0;
       border-bottom: 1px solid #777;
-      .item-title {
+      .item-type {
+        border-radius: 10px;
       }
-      .item-category {
+      &.expense .item-type {
+        background-color: rgba(192, 8, 57, 0.658);
       }
+      &.income .item-type {
+        background-color: $color-income;
+      }
+      &.investment .item-type {
+        background-color: $color-invetment;
+      }
+      &.savings .item-type {
+        background-color: $color-savings;
+      }
+
       .item-btns {
         display: flex;
         gap: 20px;
@@ -113,7 +125,6 @@
           border-radius: 6px;
           border: 1px solid #777;
           padding: 2px 8px;
-
         }
         .btn-edit {
           background-color: rgb(92, 177, 237);
@@ -122,6 +133,100 @@
         .btn-delete {
           background-color: rgb(239, 80, 101);
           color: rgb(131, 3, 3);
+        }
+      }
+    }
+  }
+  .my-stats-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 50px 20px;
+    gap: 15px;
+    .my-stats-header {
+      font-size: $font-lg;
+      font-weight: bold;
+      padding: 20px 0;
+    }
+    .my-stats-total {
+      display: flex;
+      gap: 118px;
+      align-items: center;
+      padding-bottom: 20px;
+      .total-left {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        .left-title {
+          font-size: $font-md;
+          font-weight: bold;
+        }
+        .left-sum {
+          font-size: $font-sm;
+        }
+      }
+      .total-right {
+        display: flex;
+        width: 500px;
+        height: 10px;
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 15px;
+        overflow: hidden;
+        .right {
+          height: 100%;
+          position: relative;
+          div {
+            display: none;
+          }
+          &:hover {
+            display: block;
+          }
+        }
+        .right-savings {
+          background-color: $color-savings;
+        }
+        .right-investment {
+          background-color: $color-invetment;
+        }
+        .right-expense {
+          background-color: $color-expense;
+        }
+        .right-income {
+          background-color: $color-income;
+        }
+      }
+    }
+    .my-stats-list {
+      display: flex;
+      gap: 50px;
+      justify-content: space-between;
+      width: 700px;
+      font-size: $font-sm;
+      font-weight: bold;
+      .list-item {
+        .list-sum {
+          font-size: $font-md;
+        }
+
+        &:first-child {
+          .list-title {
+            color: $color-income;
+          }
+        }
+        &:nth-child(2) {
+          .list-title {
+            color: $color-expense;
+          }
+        }
+        &:nth-child(3) {
+          .list-title {
+            color: $color-invetment;
+          }
+        }
+        &:nth-child(4) {
+          .list-title {
+            color: $color-savings;
+          }
         }
       }
     }

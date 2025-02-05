@@ -8,6 +8,7 @@ import "./MyExpenses.scss";
 import MyExpensesList from "./components/MyExpensesList";
 import Loader from "../../components/loader/Loader";
 import MyExpensesForm from "./components/MyExpensesForm";
+import MyStats from "./components/MyStats";
 
 const MyExpenses = () => {
   const initialState: IExpenseForm = {
@@ -74,6 +75,7 @@ const MyExpenses = () => {
 
   return (
     <div className="my-expense-container">
+      {expenses && <MyStats expenses={expenses}/>}
       <>
         {isFormOpen ? (
          <MyExpensesForm

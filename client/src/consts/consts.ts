@@ -9,6 +9,8 @@ export const CONSTS = {
   },
   EXPENSES: {
     DELETE_BTN: "Delete",
-    EDIT_BTN: "Edit"
+    EDIT_BTN: "Edit",
+    SUMMARY_TITLE:"Summary",
+    LEFT_TOTAL:"Net Total"
   }
 }

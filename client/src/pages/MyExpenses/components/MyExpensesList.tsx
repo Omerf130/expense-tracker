@@ -26,13 +26,14 @@ const MyExpensesList = ({ expenses, setExpenses, getSingleExpense }: MyExpensesL
 
   return (
     <div className="my-expense-list">
-      {expenses.map(({ _id, title, category, amount }) => (
-        <div className="my-expense-item" key={_id}>
+      {expenses.map(({ _id, title, category, amount, expenseType }) => (
+        <div className={`my-expense-item ${expenseType.toLowerCase()}`} key={_id}>
           <div className="item-title">{title}</div>
           <div className="item-amount">
             <PiCoinsLight /> {amount} ₪
           </div>
           <div className="item-category">{category}</div>
+          <div className="item-type">{expenseType}</div>
           <div className="item-btns">
             <button className="btn btn-edit" onClick={() => getSingleExpense(_id)}>
               {EDIT_BTN} <MdOutlineModeEdit />
