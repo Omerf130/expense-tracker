@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ILoginForm, IRegisterForm, IUserResponse } from "../../interfaces/user";
+import { IGoogleLoginPayload, ILoginForm, IRegisterForm, IUserResponse } from "../../interfaces/user";
 import { getTokenAndPayload } from "../../utils/utils";
 
 const BASE_URL = "http://localhost:8080/api/users";
@@ -15,6 +15,14 @@ export const registerUser = async (registerForm: IRegisterForm) => {
 export const loginUser = async (loginForm: ILoginForm) => {
   try {
     return await axios.post(`${BASE_URL}/login`, loginForm,{withCredentials: true});
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+export const googleLoginUser = async (googlePayload: IGoogleLoginPayload) => {
+  try {
+    return await axios.post(`${BASE_URL}/googleLogin`, googlePayload,{withCredentials: true});
   } catch (error) {
     console.error(error);
   }

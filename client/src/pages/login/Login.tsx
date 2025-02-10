@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import "./Login.scss";
 import { ILoginForm } from "../../interfaces/user";
-import { loginUser } from "../../services/api/user";
+import { googleLoginUser, loginUser } from "../../services/api/user";
 import { useNavigate, useOutletContext } from "react-router";
 import { OutletContext } from "../../interfaces/global";
 import { getTokenAndPayload } from "../../utils/utils";
+import { GoogleLogin, CredentialResponse } from "@react-oauth/google";
 
 const Login = () => {
   const { auth, setAuth } = useOutletContext<OutletContext>();
@@ -27,7 +28,25 @@ const Login = () => {
     }
   };
 
-  console.log(auth);
+  const handleGoogleLoginSuccess = async (credentialResponse: CredentialResponse) => {
+    console.log(credentialResponse)
+    if (credentialResponse.credential && credentialResponse.clientId) {
+      try {
+         await googleLoginUser({ credential: credentialResponse.credential, client_id: credentialResponse.clientId });
+        const { token, userPayload } = getTokenAndPayload();
+        if (token) {
+          setAuth({token, userPayload});
+          navigate("/myExpenses");
+        }
+      } catch (error) {
+        console.error("Google login failed:", error);
+      }
+    }
+  };
+
+  const handleGoogleLoginError = () => {
+    console.error("Google login failed");
+  };
 
   return (
     <div className="page">
@@ -55,7 +74,10 @@ const Login = () => {
           Login
         </button>
         <div className="alt-login">
-          <div className="google"></div>
+        <GoogleLogin
+            onSuccess={handleGoogleLoginSuccess}
+            onError={handleGoogleLoginError}
+          />
         </div>
       </form>
     </div>

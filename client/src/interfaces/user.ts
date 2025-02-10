@@ -20,4 +20,9 @@ export interface IUserResponse {
   user: IRegisterForm
 }
 
+export interface IGoogleLoginPayload {
+  credential: string | undefined
+  client_id: string
+}
+
 export type TRole = "Basic" | "Admin";

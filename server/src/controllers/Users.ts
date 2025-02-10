@@ -3,7 +3,7 @@ import { IUserForm, IUserLoginForm } from "../types/users";
 import { User } from "../db/schemas/Users";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-
+import { OAuth2Client } from "google-auth-library";
 
 export const getAllUsers = async(req:Request, res:Response) => {
   console.log("get request succeded")
@@ -73,6 +73,55 @@ export const login = async (req:Request, res:Response): Promise<void> => {
       res.status(400).json({message: error});
    }
 }
+
+export const googleLogin = async (req:Request, res:Response): Promise<void> => {
+   const { credential, client_id } = req.body;
+   const client = new OAuth2Client();
+
+   try {
+
+      const ticket = await client.verifyIdToken({
+         idToken: credential,
+         audience: client_id
+      });
+
+      const payload = ticket.getPayload();
+
+      if(!payload){
+         res.status(400).json({message:"token payload not found"});
+         return;
+      }
+
+      const {email,picture, family_name, given_name, name} = payload;
+
+      let user = await User.findOne({email});
+      if(!user) {
+         const newUser = {
+            firstName:given_name,
+            lastName:family_name,
+            userName:name,
+            password:"",
+            email:email,
+            image:picture,
+         }
+         user = await User.create(newUser);
+      }
+
+
+      const token =  jwt.sign({_id:user._id, role:"basic"}, "dsajdjksadkjsahdas", {expiresIn:"3d"});
+
+      res.cookie("authToken", token, {
+         httpOnly: false,
+         secure: false,
+         sameSite: "strict",
+         maxAge: 24 * 60 * 60 *1000,
+      }).status(200).json({message:"user logged in successfully", token})
+
+   } catch (error) {
+      res.status(400).json({message: error});
+   }
+}
+
 export const logout = async(req:Request, res:Response) => {
    try {
       res.clearCookie("authToken", {
