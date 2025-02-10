@@ -171,15 +171,21 @@
         height: 10px;
         background-color: rgba(0, 0, 0, 0.1);
         border-radius: 15px;
-        overflow: hidden;
+        // overflow: hidden;
         .right {
           height: 100%;
           position: relative;
+          transition:all  0.8s ease;
           div {
             display: none;
+            position: absolute;
+            bottom: 20px;
+            left: 0;
           }
           &:hover {
-            display: block;
+            div {
+              display: block;
+            }
           }
         }
         .right-savings {

@@ -58,21 +58,21 @@ const MyStats = ({ expenses }: MyStatsProps) => {
             </div>
             <div
               className="right right-expense"
-              style={{ width: `${(totalExpense / total) * 100}%` }}
+              style={{ width: `${Math.abs((totalExpense / total) * 100)}%` }}
             >
-              <div>Income</div>
+              <div>Expense</div>
             </div>
             <div
               className="right right-investment"
               style={{ width: `${(totalInvestment / total) * 100}%` }}
             >
-              <div>Income</div>
+              <div>Investment</div>
             </div>
             <div
               className="right right-savings"
               style={{ width: `${(totalSavings / total) * 100}%` }}
             >
-              <div>Income</div>
+              <div>Savings</div>
             </div>
           </div>
         )}
