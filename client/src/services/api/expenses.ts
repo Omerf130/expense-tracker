@@ -17,10 +17,10 @@ export const createExpense = async (registerForm: IExpenseForm) => {
   }
 };
 
-export const getAllExpenses = async () => {
+export const getAllExpenses = async (searchInput?: string) => {
   const {token} = getTokenAndPayload();
   try {
-    const res = await axios.get(`${BASE_URL}/`, {
+    const res = await axios.get(`${BASE_URL}/${searchInput && `?search=${searchInput}` }`, {
       headers: {
         Authorization: `Bearer ${token}`,
       }

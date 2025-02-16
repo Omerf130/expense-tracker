@@ -4,7 +4,7 @@
   background-color: $third-color;
   width: 300px;
   min-width: 300px;
-  height: 100vh;
+  height: inherit;
   padding: $gap-large;
   .main-nav {
     display: flex;
@@ -106,7 +106,7 @@
     position: static;
     width: 300px;
     min-width: 300px;
-    height: 100vh;
+    height: inherit;
     .main-nav {
       display: flex;
       align-items: flex-start;
@@ -124,7 +124,7 @@
     left: 0;
     top: 0;
     width: 100vw;
-    height: 100vh;
+    height: inherit;
     z-index: 9;
 
     &.close {

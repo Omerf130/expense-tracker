@@ -3,7 +3,6 @@ import { MdOutlineModeEdit } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { PiCoinsLight } from "react-icons/pi";
 import { deleteExpenseById } from "../../../services/api/expenses";
-import { CONSTS } from "../../../consts/consts";
 
 interface MyExpensesListProps {
   expenses: IExpense[];
@@ -11,8 +10,6 @@ interface MyExpensesListProps {
   getSingleExpense: (id: string) => Promise<void>
 }
 const MyExpensesList = ({ expenses, setExpenses, getSingleExpense }: MyExpensesListProps) => {
-  const { EDIT_BTN, DELETE_BTN } = CONSTS.EXPENSES;
-
   const handleDelete = async (id: string) => {
     const isConfirmed = window.confirm(
       "Are you sure you want to delete this expense?"
@@ -36,13 +33,12 @@ const MyExpensesList = ({ expenses, setExpenses, getSingleExpense }: MyExpensesL
           <div className="item-type">{expenseType}</div>
           <div className="item-btns">
             <button className="btn btn-edit" onClick={() => getSingleExpense(_id)}>
-              {EDIT_BTN} <MdOutlineModeEdit />
+              <MdOutlineModeEdit />
             </button>
             <button
               className="btn btn-delete"
               onClick={() => handleDelete(_id)}
             >
-              {DELETE_BTN}
               <RiDeleteBin6Line />
             </button>
           </div>

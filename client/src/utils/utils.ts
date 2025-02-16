@@ -14,3 +14,13 @@ export const getTokenAndPayload = () => {
   }
   return { token: null, userPayload: null };
 };
+
+export const debounce = (func: any, delay: number = 1000) => {
+  let timer: any;
+  return (...args: any[]) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func(...args);
+    }, delay);
+  };
+};

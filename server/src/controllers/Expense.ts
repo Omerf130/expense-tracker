@@ -7,9 +7,18 @@ export interface AuthRequest extends Request {
 
 export const getAllExpenses = async (req:AuthRequest, res:Response) => {
    const userId = req.userId;
+   const searchQuery = req.query.search as string || "";
 
    try {
-      const list = await Expense.find({userId});
+      const filter: any = { userId };
+
+      if (searchQuery.trim() !== "") {
+         filter.$or = [
+            { title: { $regex: searchQuery, $options: "i" } },
+         ];
+      }
+      const list = await Expense.find(filter);
+
       res.status(200).json({message:"All expenses recieved successfully!", list});
    } catch (error) {
       res.status(400).json({message:error});

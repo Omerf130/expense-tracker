@@ -8,6 +8,28 @@
   align-items: center;
   padding: 30px 10px;
   gap: 40px;
+  .my-expense-search {
+    border-radius: $border-radius;
+    width: 80%;
+    max-width: 800px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: rgba(0,0,0,0.2);
+    color: #fff;
+    padding: 5px;
+    input {
+      border: none;
+      background-color: transparent;
+      color: #fff;
+      width: 100%;
+      outline: none;
+      font-size: $font-md;
+      &::placeholder {
+        color: rgba(255,255,255,0.7);
+      }
+    }
+  }
   .my-expense-form {
     border: 2px solid $btn-color-light;
     border-radius: 8px;
@@ -87,10 +109,10 @@
   }
   .my-expense-list {
     border: 2px solid $btn-color-light;
-    width: 60%;
+    width: 70%;
     border-radius: 8px;
     padding: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.06);
+    box-shadow: shadow;
     display: flex;
     gap: 15px;
     flex-direction: column;
@@ -100,8 +122,28 @@
       justify-content: space-between;
       padding: 15px 0;
       border-bottom: 1px solid #777;
+      gap: 10px;
+      .item-title {
+        flex: 3;
+        font-size: $font-md;
+      }
+      .item-amount {
+        flex: 1;
+        min-width: fit-content;
+      }
+      .item-category {
+        flex: 1;
+      }
+      .item-btns {
+        flex: 1;
+      }
       .item-type {
         border-radius: 6px;
+        color: #fff;
+        padding: 5px 8px;
+        box-shadow: shadow;
+        flex: 2;
+        text-align: center;
       }
       &.expense .item-type {
         background-color: rgba(192, 8, 57, 0.525);
@@ -119,20 +161,23 @@
       .item-btns {
         display: flex;
         gap: 20px;
+        height: 35px;
         .btn {
           cursor: pointer;
           font-size: 20px;
           border-radius: 6px;
-          border: 1px solid #777;
+          border: none;
           padding: 2px 8px;
+          box-shadow: shadow;
+          color: #fff;
+          display: flex;
+          align-items: center;
         }
         .btn-edit {
-          // background-color: rgb(92, 177, 237);
-          color: rgba(79, 79, 240, 0.848);
+          background-color: rgb(92, 177, 237);
         }
         .btn-delete {
-          // background-color: rgb(239, 80, 101);
-          color: rgba(239, 59, 59, 0.848);
+          background-color: rgba(192, 8, 57, 0.525);
         }
       }
     }
@@ -175,7 +220,7 @@
         .right {
           height: 100%;
           position: relative;
-          transition:all  0.8s ease;
+          transition: all 0.8s ease;
           div {
             display: none;
             position: absolute;
