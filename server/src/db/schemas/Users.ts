@@ -8,6 +8,7 @@ const userSchema = new Schema<IUser>({
   email: {type:String, required:true, unique:true},
   password: {type:String, required:false},
   image: {type:String, required:true},
+  role: {type: String}
 },{timestamps:true});
 
 export const User = mongoose.model<IUser>("User", userSchema);

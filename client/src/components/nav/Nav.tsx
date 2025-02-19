@@ -1,12 +1,11 @@
 import { NavLink, useNavigate } from "react-router";
 import { RiMoneyCnyCircleLine } from "react-icons/ri";
 import "./Nav.scss";
-import { CONSTS } from "../../consts/consts";
 import { IoHomeOutline } from "react-icons/io5";
 import { IoLogInOutline } from "react-icons/io5";
 import { SiGnuprivacyguard } from "react-icons/si";
 import { FaMoon, FaSun } from "react-icons/fa";
-import { IAuth, TTheme } from "../../interfaces/global";
+import { IAuth, TLanguage, TTheme } from "../../interfaces/global";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { useEffect, useState } from "react";
@@ -14,26 +13,29 @@ import { GiMoneyStack } from "react-icons/gi";
 import { logoutUser, getUserById } from "../../services/api/user";
 import Avatar from "./Avatar";
 import { IRegisterForm } from "../../interfaces/user";
+import { useTranslation } from "react-i18next";
 
 interface NavProps {
   theme: TTheme;
   onToggleTheme: (theme: TTheme) => void;
   auth: IAuth;
   setAuth: React.Dispatch<React.SetStateAction<IAuth>>;
+  onToggleLanguage: (lng: TLanguage) => void;
+  lang: TLanguage;
 }
 
-const Nav = ({ onToggleTheme, theme, auth, setAuth }: NavProps) => {
-  const {
-    LINK_HOME,
-    LINK_LOGIN,
-    LINK_REGISTER,
-    NAV_LOGO,
-    LINK_MY_EXPENSES,
-    LINK_LOGOUT,
-  } = CONSTS.NAV;
+const Nav = ({
+  onToggleTheme,
+  theme,
+  auth,
+  setAuth,
+  onToggleLanguage,
+  lang,
+}: NavProps) => {
   const [isMainNavOpen, setIsMainNavOpen] = useState(window.innerWidth > 768);
   const [userDetails, setUserDetails] = useState<IRegisterForm | null>(null);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const handleResize = () => {
@@ -48,7 +50,6 @@ const Nav = ({ onToggleTheme, theme, auth, setAuth }: NavProps) => {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-
   }, []);
 
   useEffect(() => {
@@ -69,10 +70,10 @@ const Nav = ({ onToggleTheme, theme, auth, setAuth }: NavProps) => {
 
   const handleGetUser = async (id: string) => {
     try {
-        const data = await getUserById(id);
-        data && setUserDetails(data.user);
+      const data = await getUserById(id);
+      data && setUserDetails(data.user);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   };
 
@@ -81,27 +82,36 @@ const Nav = ({ onToggleTheme, theme, auth, setAuth }: NavProps) => {
       <div className="main-nav">
         <div className="nav-logo">
           <RiMoneyCnyCircleLine fontSize={50} />
-          <div className="nav-title">{NAV_LOGO}</div>
+          <div className="nav-title">{t("NAV.NAV_LOGO")}</div>
         </div>
-        <div className="nav-dark">
-          <div className="dark-toggle">
-            <div className={`dark-circle ${theme}`} />
-            <FaMoon
-              color="#00308F"
-              size={20}
-              onClick={() => onToggleTheme("dark")}
-            />
-            <FaSun
-              color="#BDB76B"
-              size={20}
-              onClick={() => onToggleTheme("light")}
-            />
+        <div className="settings-wrapper">
+          <div className="nav-dark">
+            <div className="dark-toggle">
+              <div className={`dark-circle ${theme}`} />
+              <FaMoon
+                color="#00308F"
+                size={20}
+                onClick={() => onToggleTheme("dark")}
+              />
+              <FaSun
+                color="#BDB76B"
+                size={20}
+                onClick={() => onToggleTheme("light")}
+              />
+            </div>
+          </div>
+          <div className="nav-lang">
+            <div className="lang-toggle">
+              <div className={`lang-circle ${lang}`} />
+              <div onClick={() => onToggleLanguage("he")}>He</div>
+              <div onClick={() => onToggleLanguage("en")}>En</div>
+            </div>
           </div>
         </div>
         <div className="nav-links">
           {auth.token ? (
             <>
-              {userDetails && <Avatar userDetails={userDetails}/>}
+              {userDetails && <Avatar userDetails={userDetails} />}
 
               <NavLink
                 to="/myExpenses"
@@ -110,12 +120,23 @@ const Nav = ({ onToggleTheme, theme, auth, setAuth }: NavProps) => {
                 }
               >
                 <GiMoneyStack fontSize={24} />
-                <span> {LINK_MY_EXPENSES}</span>
+                <span> {t("NAV.LINK_MY_EXPENSES")}</span>
               </NavLink>
+              {auth.userPayload?.role === "admin" && (
+                <NavLink
+                  to="/admin"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link active" : "nav-link"
+                  }
+                >
+                  <GiMoneyStack fontSize={24} />
+                  <span> {t("NAV.LINK_MY_EXPENSES")}</span>
+                </NavLink>
+              )}
 
               <button onClick={onLogout}>
                 <GiMoneyStack fontSize={24} />
-                <span> {LINK_LOGOUT}</span>
+                <span> {t("NAV.LINK_LOGOUT")}</span>
               </button>
             </>
           ) : (
@@ -128,7 +149,7 @@ const Nav = ({ onToggleTheme, theme, auth, setAuth }: NavProps) => {
                 }
               >
                 <IoHomeOutline fontSize={24} />
-                <span>{LINK_HOME}</span>
+                <span>{t("NAV.LINK_HOME")}</span>
               </NavLink>
               <NavLink
                 to="/login"
@@ -137,7 +158,7 @@ const Nav = ({ onToggleTheme, theme, auth, setAuth }: NavProps) => {
                 }
               >
                 <IoLogInOutline fontSize={24} />
-                <span>{LINK_LOGIN}</span>
+                <span>{t("NAV.LINK_LOGIN")}</span>
               </NavLink>
               <NavLink
                 to="/register"
@@ -146,7 +167,7 @@ const Nav = ({ onToggleTheme, theme, auth, setAuth }: NavProps) => {
                 }
               >
                 <SiGnuprivacyguard fontSize={24} />
-                <span> {LINK_REGISTER}</span>
+                <span> {t("NAV.LINK_REGISTER")}</span>
               </NavLink>
             </>
           )}

@@ -25,4 +25,4 @@ export interface IGoogleLoginPayload {
   client_id: string
 }
 
-export type TRole = "Basic" | "Admin";
+export type TRole = "basic" | "admin";

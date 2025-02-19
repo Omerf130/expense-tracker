@@ -1,0 +1,20 @@
+{
+
+  "HOME": {
+    "Manage Your Expense":"נהל את ההוצאות שלך"
+  },
+  "NAV": {
+    "LINK_HOME": "דף הבית",
+    "LINK_LOGIN": "התחברות",
+    "LINK_REGISTER": "הרשמה",
+    "LINK_LOGOUT": "התנתקות",
+    "NAV_LOGO": "Expense Tracker", 
+    "LINK_MY_EXPENSES": "ההוצאות שלי"
+  },
+  "EXPENSES": {
+    "DELETE_BTN": "מחיקה",
+    "EDIT_BTN": "עריכה",
+    "SUMMARY_TITLE":"סיכום",
+    "LEFT_TOTAL":"סך הכך נטו"
+  }
+}

@@ -2,9 +2,9 @@ import { IExpense } from "./expense";
 import { IUserPayload } from "./user";
 
 export type TTheme = "light" | "dark";
+export type TLanguage = "he" | "en";
 
 export interface IAuth {
-  // isAuthenticated: boolean
   token: string | null
   userPayload: IUserPayload | null
 }

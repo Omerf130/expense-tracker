@@ -32,7 +32,7 @@ export const register = async (req:Request, res:Response) => {
          return;
       }
 
-      const newUser = await User.create({...req.body, password: hashedPassword});
+      const newUser = await User.create({...req.body, password: hashedPassword, role: "basic"});
       res.status(201).json({message: "new user registered", user:newUser});
 
    } catch (error) {
@@ -103,6 +103,7 @@ export const googleLogin = async (req:Request, res:Response): Promise<void> => {
             password:"",
             email:email,
             image:picture,
+            role: "basic"
          }
          user = await User.create(newUser);
       }
@@ -128,7 +129,7 @@ export const logout = async(req:Request, res:Response) => {
          httpOnly: false,
          secure: false,
          sameSite: "strict",
-         maxAge: 24 * 60 * 60 *1000, 
+         // maxAge: 24 * 60 * 60 *1000, 
       }).status(200).json({message:"User loged out successfully"})
    } catch (error) {
       res.status(400).json({message: error});

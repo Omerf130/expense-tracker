@@ -9,6 +9,7 @@ export interface IUserForm {
 
 export interface IUser extends IUserForm{
   _id:string
+  role: IRole
   createdAt: Date
   updatedAt: Date
 }
@@ -21,3 +22,5 @@ export interface IUserLoginForm {
 export interface AuthRequest extends Request {
   userId?: string
 }
+
+export type IRole = "basic" | "admin"
