@@ -1,20 +1,40 @@
 {
-
   "HOME": {
-    "Manage Your Expense":"נהל את ההוצאות שלך"
+    "Manage Your Expense": "נהל את ההוצאות שלך",
+    "Save Money": "תתחיל לחסוך כסף",
+    "start saving money with this app": "תתחיל לחסוך כסף בעזרת הכלים שיש לנו פה",
+    "Get Started": "הרשמה"
   },
   "NAV": {
     "LINK_HOME": "דף הבית",
     "LINK_LOGIN": "התחברות",
     "LINK_REGISTER": "הרשמה",
     "LINK_LOGOUT": "התנתקות",
-    "NAV_LOGO": "Expense Tracker", 
+    "NAV_LOGO": "Expense Tracker",
     "LINK_MY_EXPENSES": "ההוצאות שלי"
   },
   "EXPENSES": {
     "DELETE_BTN": "מחיקה",
     "EDIT_BTN": "עריכה",
-    "SUMMARY_TITLE":"סיכום",
-    "LEFT_TOTAL":"סך הכך נטו"
+    "SUMMARY_TITLE": "סיכום",
+    "LEFT_TOTAL": "סך הכך נטו"
+  },
+  "MYSTATS": {
+    "Income": "הכנסה",
+    "Expense": "הוצאה",
+    "Investment": "השקעות",
+    "Savings": "חסכונות"
+  },
+  "MYEXPENSES": {
+    "Add New Transaction": "הוסף פעולה חדשה"
+  },
+  "MYEXPENSEFORM": {
+    "Income": "הכנסה",
+    "Expense": "הוצאה",
+    "Investment": "השקעות",
+    "Savings": "חסכונות",
+    "Cancel": "בטל",
+    "Title": "תיאור פריט",
+    "Category": "קטגוריה"
   }
 }

@@ -1,4 +1,4 @@
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import "./Home.scss";
 import img from "../img/financial-crime-and-bribe-concept-human-hands-giving-and-taking-money-bribe-doing-corruption-over-blue-background-illustration-vector.jpg";
 import img2 from "../img/original-defd5410841e3d97fd129d8c83ae8eef.png";
@@ -9,9 +9,9 @@ const Home = () => {
   return (
     <div className="home-page">
       <h1>{t("HOME.Manage Your Expense")}</h1>
-      <h2>Save Money</h2>
-      <h4>start saving money with this app</h4>
-      <button className="btn-start">Get Strated</button>
+      <h2>{t("HOME.Save Money")}</h2>
+      <h4>{t("HOME.start saving money with this app")}</h4>
+      <button className="btn-start">{t("HOME.Get Started")}</button>
       <div className="img-top">
         <img className="img" src={img} alt="" />
         <p>

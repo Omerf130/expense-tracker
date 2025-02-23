@@ -1,6 +1,9 @@
 {
   "HOME": {
-    "Manage Your Expense": "Manage Your Expense"
+    "Manage Your Expense": "Manage Your Expense",
+    "Save Money": "Save Money",
+    "start saving money with this app": "start saving money with this app",
+    "Get Started": "Get Started"
   },
   "NAV": {
     "LINK_HOME": "Home",
@@ -15,5 +18,23 @@
     "EDIT_BTN": "Edit",
     "SUMMARY_TITLE": "Summary",
     "LEFT_TOTAL": "Net Total"
+  },
+  "MYSTATS": {
+    "Income": "Income",
+    "Expense": "Expense",
+    "Investment": "Investment",
+    "Savings": "Savings"
+  },
+  "MYEXPENSES": {
+    "Add New Transaction": "Add New Transaction"
+  },
+  "MYEXPENSEFORM": {
+    "Income": "Income",
+    "Expense": "Expense",
+    "Investment": "Investment",
+    "Savings": "Savings",
+    "Cancel": "cancel",
+    "Title": "Title",
+    "Category": "Category"
   }
 }

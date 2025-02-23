@@ -1,4 +1,5 @@
 import { IExpenseForm } from "../../../interfaces/expense"
+import { useTranslation } from "react-i18next";
 
 interface MyExpensesFormProps {
   expenseForm: IExpenseForm
@@ -10,13 +11,14 @@ interface MyExpensesFormProps {
 }
 
 const MyExpensesForm = ({expenseForm,isEditMode, setExpenseForm, onRadioInputChange, onSubmit, onToggleFormOpen}:MyExpensesFormProps) => {
+  const { t } = useTranslation();
   return (
     <form className="my-expense-form" onSubmit={onSubmit}>
             <div className="form-inputs">
               <input
                 className="form-input"
                 type="text"
-                placeholder="Title"
+                placeholder={t("MYEXPENSEFORM.Title")}
                 value={expenseForm.title}
                 onChange={(e) =>
                   setExpenseForm((prev) => ({ ...prev, title: e.target.value }))
@@ -25,7 +27,7 @@ const MyExpensesForm = ({expenseForm,isEditMode, setExpenseForm, onRadioInputCha
               <input
                 className="form-input"
                 type="text"
-                placeholder="Category"
+                placeholder={t("MYEXPENSEFORM.Category")}
                 value={expenseForm.category}
                 onChange={(e) =>
                   setExpenseForm((prev) => ({
@@ -55,7 +57,7 @@ const MyExpensesForm = ({expenseForm,isEditMode, setExpenseForm, onRadioInputCha
                     onChange={onRadioInputChange}
                     checked={expenseForm.expenseType === "INCOME"}
                   />
-                  <span>Income</span>
+                  <span>{t("MYEXPENSEFORM.Income")}</span>
                 </label>
               </div>
               <div className="radio-input">
@@ -67,7 +69,7 @@ const MyExpensesForm = ({expenseForm,isEditMode, setExpenseForm, onRadioInputCha
                     onChange={onRadioInputChange}
                     checked={expenseForm.expenseType === "EXPENSE"}
                   />
-                  <span>Expense</span>
+                  <span>{t("MYEXPENSEFORM.Expense")}</span>
                 </label>
               </div>
               <div className="radio-input">
@@ -79,7 +81,7 @@ const MyExpensesForm = ({expenseForm,isEditMode, setExpenseForm, onRadioInputCha
                     onChange={onRadioInputChange}
                     checked={expenseForm.expenseType === "INVESTMENT"}
                   />
-                  <span>Investment</span>
+                  <span>{t("MYEXPENSEFORM.Investment")}</span>
                 </label>
               </div>
               <div className="radio-input">
@@ -91,7 +93,7 @@ const MyExpensesForm = ({expenseForm,isEditMode, setExpenseForm, onRadioInputCha
                     onChange={onRadioInputChange}
                     checked={expenseForm.expenseType === "SAVINGS"}
                   />
-                  <span>Savings</span>
+                  <span>{t("MYEXPENSEFORM.Savings")}</span>
                 </label>
               </div>
             </div>
@@ -101,7 +103,7 @@ const MyExpensesForm = ({expenseForm,isEditMode, setExpenseForm, onRadioInputCha
                 className="action-btn"
                 onClick={() => onToggleFormOpen(false)}
               >
-                Cancel
+                {t("MYEXPENSEFORM.Cancel")}
               </button>
             </div>
           </form>

@@ -21,8 +21,10 @@ import MyExpensesForm from "./components/MyExpensesForm";
 import MyStats from "./components/MyStats";
 import { FaSearch } from "react-icons/fa";
 import { debounce } from "../../utils/utils";
+import { useTranslation } from "react-i18next";
 
 const MyExpenses = () => {
+  const { t } = useTranslation();
   const initialState: IExpenseForm = {
     title: "",
     category: "",
@@ -121,7 +123,7 @@ const MyExpenses = () => {
             onClick={() => onToggleFormOpen(true)}
           >
             <IoMdAddCircleOutline />
-            <span>Add New Transaction</span>
+            <span>{t("MYEXPENSES.Add New Transaction")}</span>
           </button>
         )}
       </>

@@ -2,12 +2,14 @@ import { IExpense } from "../../../interfaces/expense";
 import { CONSTS } from "../../../consts/consts";
 import { useEffect, useState } from "react";
 import { FaArrowTrendDown, FaArrowTrendUp } from "react-icons/fa6";
+import { useTranslation } from "react-i18next";
 
 interface MyStatsProps {
   expenses: IExpense[];
 }
 
 const MyStats = ({ expenses }: MyStatsProps) => {
+  const { t } = useTranslation();
   const { SUMMARY_TITLE, LEFT_TOTAL } = CONSTS.EXPENSES;
   const [total, setTotal] = useState(0);
   const totalExpense = expenses
@@ -79,19 +81,19 @@ const MyStats = ({ expenses }: MyStatsProps) => {
       </div>
       <div className="my-stats-list">
         <div className="list-item">
-          <div className="list-title">Income</div>
+          <div className="list-title">{t("MYSTATS.Income")}</div>
           <div className="list-sum">{totalIncome}₪ <FaArrowTrendUp color="green"/></div>
         </div>
         <div className="list-item">
-          <div className="list-title">Expense</div>
+          <div className="list-title">{t("MYSTATS.Expense")}</div>
           <div className="list-sum">{totalExpense}₪ <FaArrowTrendDown color="red"/></div>
         </div>
         <div className="list-item">
-          <div className="list-title">Investment</div>
+          <div className="list-title">{t("MYSTATS.Investment")}</div>
           <div className="list-sum">{totalInvestment}₪ <FaArrowTrendUp color="green"/></div>
         </div>
         <div className="list-item">
-          <div className="list-title">Savings</div>
+          <div className="list-title">{t("MYSTATS.Savings")}</div>
           <div className="list-sum">{totalSavings}₪ <FaArrowTrendUp color="green"/></div>
         </div>
       </div>
