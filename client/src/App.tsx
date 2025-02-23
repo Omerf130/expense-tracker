@@ -12,7 +12,7 @@ function App() {
   const { auth, setAuth } = useAuth();
   const [expenses,setExpenses] = useState<IExpense[] | null>(null);
   const { i18n } = useTranslation();
-  const [lang, setLang] = useState<TLanguage>("en");
+  const [lang, setLang] = useState<TLanguage>(localStorage.getItem("lang") as TLanguage ?? "en");
   useEffect(() => {
     if(document) {
       const bodyElement = document.querySelector("body");

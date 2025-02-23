@@ -11,7 +11,8 @@
     "LINK_REGISTER": "הרשמה",
     "LINK_LOGOUT": "התנתקות",
     "NAV_LOGO": "Expense Tracker",
-    "LINK_MY_EXPENSES": "ההוצאות שלי"
+    "LINK_MY_EXPENSES": "ההוצאות שלי",
+    "ADMIN": "admin"
   },
   "EXPENSES": {
     "DELETE_BTN": "מחיקה",

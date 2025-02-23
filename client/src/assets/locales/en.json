@@ -11,7 +11,8 @@
     "LINK_REGISTER": "Register",
     "LINK_LOGOUT": "Logout",
     "NAV_LOGO": "Expense Tracker",
-    "LINK_MY_EXPENSES": "My Expenses"
+    "LINK_MY_EXPENSES": "My Expenses",
+    "ADMIN": "admin"
   },
   "EXPENSES": {
     "DELETE_BTN": "Delete",

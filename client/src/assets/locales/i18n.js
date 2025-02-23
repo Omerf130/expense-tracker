@@ -10,7 +10,7 @@ i18n
       en: { translation: en },
       he: { translation: he }
     },
-    lng: 'en', // Default language
+    lng: localStorage.getItem("lang") ?? 'en',
     fallbackLng: 'en', // Fallback language
     supportedLngs: ['en', 'he'],
     interpolation: {

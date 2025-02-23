@@ -14,6 +14,7 @@ import { logoutUser, getUserById } from "../../services/api/user";
 import Avatar from "./Avatar";
 import { IRegisterForm } from "../../interfaces/user";
 import { useTranslation } from "react-i18next";
+import { RiAdminLine } from "react-icons/ri";
 
 interface NavProps {
   theme: TTheme;
@@ -77,6 +78,11 @@ const Nav = ({
     }
   };
 
+  const toggleLang = (lang: TLanguage) => {
+    onToggleLanguage(lang);
+    localStorage.setItem("lang", lang);
+  }
+
   return (
     <nav className={`nav-container ${isMainNavOpen ? "open" : "close"}`}>
       <div className="main-nav">
@@ -103,8 +109,8 @@ const Nav = ({
           <div className="nav-lang">
             <div className="lang-toggle">
               <div className={`lang-circle ${lang}`} />
-              <div onClick={() => onToggleLanguage("he")}>He</div>
-              <div onClick={() => onToggleLanguage("en")}>En</div>
+              <div onClick={() => toggleLang("he")}>He</div>
+              <div onClick={() => toggleLang("en")}>En</div>
             </div>
           </div>
         </div>
@@ -129,8 +135,8 @@ const Nav = ({
                     isActive ? "nav-link active" : "nav-link"
                   }
                 >
-                  <GiMoneyStack fontSize={24} />
-                  <span> {t("NAV.LINK_MY_EXPENSES")}</span>
+                  <RiAdminLine fontSize={24} />
+                  <span> {t("NAV.ADMIN")}</span>
                 </NavLink>
               )}
 

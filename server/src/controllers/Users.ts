@@ -6,7 +6,12 @@ import jwt from "jsonwebtoken";
 import { OAuth2Client } from "google-auth-library";
 
 export const getAllUsers = async(req:Request, res:Response) => {
-  console.log("get request succeded")
+  try {
+   const list = await User.find();
+   res.status(200).json({message:"All users recieved successfully!", list});
+  } catch (error) {
+   res.status(400).json({message:error})
+  }
 }
 export const getUserById = async(req:Request, res:Response) => {
    const {id} = req.params;
@@ -109,7 +114,7 @@ export const googleLogin = async (req:Request, res:Response): Promise<void> => {
       }
 
 
-      const token =  jwt.sign({_id:user._id, role:"basic"}, "dsajdjksadkjsahdas", {expiresIn:"3d"});
+      const token =  jwt.sign({_id:user._id, role:user.role}, "dsajdjksadkjsahdas", {expiresIn:"3d"});
 
       res.cookie("authToken", token, {
          httpOnly: false,

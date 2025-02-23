@@ -1,5 +1,5 @@
 import axios from "axios";
-import { IGoogleLoginPayload, ILoginForm, IRegisterForm, IUserResponse } from "../../interfaces/user";
+import { IGoogleLoginPayload, ILoginForm, IRegisterForm, IUserResponse, IUsersResponse } from "../../interfaces/user";
 import { getTokenAndPayload } from "../../utils/utils";
 
 const BASE_URL = "http://localhost:8080/api/users";
@@ -47,5 +47,19 @@ export const getUserById = async (id: string) => {
   return res.data as IUserResponse;
   } catch (error) {
     console.error(error);
+  }
+}
+
+export const getAllUsers = async () => {
+
+  try {
+    const res = await axios.get(BASE_URL, {
+      withCredentials: true, // ✅ Important: allows cookies to be sent
+    });
+    return res.data as IUsersResponse
+    
+  } catch (error) {
+    console.error(error);
+    
   }
 }
