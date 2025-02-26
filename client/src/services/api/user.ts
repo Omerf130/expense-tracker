@@ -63,3 +63,15 @@ export const getAllUsers = async () => {
     
   }
 }
+
+export const deleteUserById = async (id: string) => {
+  try {
+    const res = await axios.delete(`${BASE_URL}/${id}`, {
+      withCredentials: true,
+    });
+    return res.data as IUsersResponse
+    
+  } catch (error) {
+    console.log(error)
+  }
+}

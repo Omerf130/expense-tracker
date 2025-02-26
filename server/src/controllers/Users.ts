@@ -1,148 +1,181 @@
 import { NextFunction, Request, Response } from "express";
 import { IUserForm, IUserLoginForm } from "../types/users";
 import { User } from "../db/schemas/Users";
+import { Expense } from "../db/schemas/Expense";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { OAuth2Client } from "google-auth-library";
 
-export const getAllUsers = async(req:Request, res:Response) => {
+export const getAllUsers = async (req: Request, res: Response) => {
   try {
-   const list = await User.find();
-   res.status(200).json({message:"All users recieved successfully!", list});
+    const list = await User.find();
+    res.status(200).json({ message: "All users recieved successfully!", list });
   } catch (error) {
-   res.status(400).json({message:error})
+    res.status(400).json({ message: error });
   }
-}
-export const getUserById = async(req:Request, res:Response) => {
-   const {id} = req.params;
-   try {
-      const user = await User.findById(id);
-      res.status(200).json({message:"user recieved successfully", user});
-   } catch (error) {
-      res.status(400).json({message: error})
-   }
-}
-export const register = async (req:Request, res:Response) => {
-   const {password,email} = req.body as IUserForm;
-   const saltNumber = 10;
+};
+export const getUserById = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  try {
+    const user = await User.findById(id);
+    res.status(200).json({ message: "user recieved successfully", user });
+  } catch (error) {
+    res.status(400).json({ message: error });
+  }
+};
+export const register = async (req: Request, res: Response) => {
+  const { password, email } = req.body as IUserForm;
+  const saltNumber = 10;
 
-   if(!password || !email) throw Error("password and email are required");
+  if (!password || !email) throw Error("password and email are required");
 
-   try {
-      const hashedPassword = await bcrypt.hash(password, saltNumber);
-      
-      const isUserExist = await User.findOne({email});
-      if(isUserExist) {
-         res.status(400).json({message: "user already exist"});
-         return;
-      }
+  try {
+    const hashedPassword = await bcrypt.hash(password, saltNumber);
 
-      const newUser = await User.create({...req.body, password: hashedPassword, role: "basic"});
-      res.status(201).json({message: "new user registered", user:newUser});
-
-   } catch (error) {
-      res.status(400).json({message: error});
-   }
-}
-
-export const login = async (req:Request, res:Response): Promise<void> => {
-   const { userName, password } = req.body as IUserLoginForm;
-   if(!userName || !password) {
-      res.status(400).json({message:"userName and password required"});
+    const isUserExist = await User.findOne({ email });
+    if (isUserExist) {
+      res.status(400).json({ message: "user already exist" });
       return;
-   }
+    }
 
-   try {
-      const user = await User.findOne({userName});
-      if(!user) {
-         res.status(404).json({message: "user not exist"});
-         return;
-      }
+    const newUser = await User.create({
+      ...req.body,
+      password: hashedPassword,
+      role: "basic",
+    });
+    res.status(201).json({ message: "new user registered", user: newUser });
+  } catch (error) {
+    res.status(400).json({ message: error });
+  }
+};
 
-      const isMatch = await bcrypt.compare(password, user.password);
-      if(!isMatch) {
-         res.status(400).json({message:"password incorrect"});
-         return;
-      }
+export const login = async (req: Request, res: Response): Promise<void> => {
+  const { userName, password } = req.body as IUserLoginForm;
+  if (!userName || !password) {
+    res.status(400).json({ message: "userName and password required" });
+    return;
+  }
 
-      const token =  jwt.sign({_id:user._id, role:"basic"}, "dsajdjksadkjsahdas", {expiresIn:"3d"});
+  try {
+    const user = await User.findOne({ userName });
+    if (!user) {
+      res.status(404).json({ message: "user not exist" });
+      return;
+    }
 
-      res.cookie("authToken", token, {
-         httpOnly: false,
-         secure: false,
-         sameSite: "strict",
-         maxAge: 24 * 60 * 60 *1000,
-      }).status(200).json({message:"user logged in successfully", token})
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      res.status(400).json({ message: "password incorrect" });
+      return;
+    }
 
-   } catch (error) {
-      res.status(400).json({message: error});
-   }
-}
+    const token = jwt.sign(
+      { _id: user._id, role: "basic" },
+      "dsajdjksadkjsahdas",
+      { expiresIn: "3d" }
+    );
 
-export const googleLogin = async (req:Request, res:Response): Promise<void> => {
-   const { credential, client_id } = req.body;
-   const client = new OAuth2Client();
+    res
+      .cookie("authToken", token, {
+        httpOnly: false,
+        secure: false,
+        sameSite: "strict",
+        maxAge: 24 * 60 * 60 * 1000,
+      })
+      .status(200)
+      .json({ message: "user logged in successfully", token });
+  } catch (error) {
+    res.status(400).json({ message: error });
+  }
+};
 
-   try {
+export const googleLogin = async (
+  req: Request,
+  res: Response
+): Promise<void> => {
+  const { credential, client_id } = req.body;
+  const client = new OAuth2Client();
 
-      const ticket = await client.verifyIdToken({
-         idToken: credential,
-         audience: client_id
-      });
+  try {
+    const ticket = await client.verifyIdToken({
+      idToken: credential,
+      audience: client_id,
+    });
 
-      const payload = ticket.getPayload();
+    const payload = ticket.getPayload();
 
-      if(!payload){
-         res.status(400).json({message:"token payload not found"});
-         return;
-      }
+    if (!payload) {
+      res.status(400).json({ message: "token payload not found" });
+      return;
+    }
 
-      const {email,picture, family_name, given_name, name} = payload;
+    const { email, picture, family_name, given_name, name } = payload;
 
-      let user = await User.findOne({email});
-      if(!user) {
-         const newUser = {
-            firstName:given_name,
-            lastName:family_name,
-            userName:name,
-            password:"",
-            email:email,
-            image:picture,
-            role: "basic"
-         }
-         user = await User.create(newUser);
-      }
+    let user = await User.findOne({ email });
+    if (!user) {
+      const newUser = {
+        firstName: given_name,
+        lastName: family_name,
+        userName: name,
+        password: "",
+        email: email,
+        image: picture,
+        role: "basic",
+      };
+      user = await User.create(newUser);
+    }
 
+    const token = jwt.sign(
+      { _id: user._id, role: user.role },
+      "dsajdjksadkjsahdas",
+      { expiresIn: "3d" }
+    );
 
-      const token =  jwt.sign({_id:user._id, role:user.role}, "dsajdjksadkjsahdas", {expiresIn:"3d"});
+    res
+      .cookie("authToken", token, {
+        httpOnly: false,
+        secure: false,
+        sameSite: "strict",
+        maxAge: 24 * 60 * 60 * 1000,
+      })
+      .status(200)
+      .json({ message: "user logged in successfully", token });
+  } catch (error) {
+    res.status(400).json({ message: error });
+  }
+};
 
-      res.cookie("authToken", token, {
-         httpOnly: false,
-         secure: false,
-         sameSite: "strict",
-         maxAge: 24 * 60 * 60 *1000,
-      }).status(200).json({message:"user logged in successfully", token})
+export const logout = async (req: Request, res: Response) => {
+  try {
+    res
+      .clearCookie("authToken", {
+        httpOnly: false,
+        secure: false,
+        sameSite: "strict",
+        // maxAge: 24 * 60 * 60 *1000,
+      })
+      .status(200)
+      .json({ message: "User loged out successfully" });
+  } catch (error) {
+    res.status(400).json({ message: error });
+  }
+};
+export const deleteUserById = async (req: Request, res: Response) => {
+  const { id } = req.params;
 
-   } catch (error) {
-      res.status(400).json({message: error});
-   }
-}
-
-export const logout = async(req:Request, res:Response) => {
-   try {
-      res.clearCookie("authToken", {
-         httpOnly: false,
-         secure: false,
-         sameSite: "strict",
-         // maxAge: 24 * 60 * 60 *1000, 
-      }).status(200).json({message:"User loged out successfully"})
-   } catch (error) {
-      res.status(400).json({message: error});
-   }
-}
-export const deleteUserById = async(req:Request, res:Response) => {
-   console.log("delete request succeded")
-}
-export const updateUserById = async(req:Request, res:Response) => {
-   console.log("put request succeded")
-}
+  try {
+    const deletedUser = await User.findByIdAndDelete(id);
+    if (!deletedUser) {
+      res.status(404).json({ message: "user not found" });
+      return;
+    }
+    await Expense.deleteMany({ userId: id });
+    const list = await User.find();
+    res.status(200).json({ message: "User deleted successfully", list });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+export const updateUserById = async (req: Request, res: Response) => {
+  console.log("put request succeded");
+};

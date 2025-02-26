@@ -3,6 +3,7 @@ import { MdOutlineModeEdit } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { PiCoinsLight } from "react-icons/pi";
 import { deleteExpenseById } from "../../../services/api/expenses";
+import { toast } from "react-toastify";
 
 interface MyExpensesListProps {
   expenses: IExpense[];
@@ -17,6 +18,7 @@ const MyExpensesList = ({ expenses, setExpenses, getSingleExpense }: MyExpensesL
     if (isConfirmed) {
       const data = await deleteExpenseById(id);
       data?.list && setExpenses(data?.list);
+      toast.success("Expense Deleted Successfully");
     }
   };
 

@@ -37,6 +37,21 @@
       .user-lastname {
         flex: 1;
       }
+      .user-delete {
+        flex: 1;
+        .btn-delete {
+          background-color: rgba(192, 8, 57, 0.525);
+          cursor: pointer;
+          font-size: 20px;
+          border-radius: 6px;
+          border: none;
+          padding: 2px 8px;
+          box-shadow: shadow;
+          color: #fff;
+          display: flex;
+          align-items: center;
+        }
+      }
     }
   }
 }

@@ -9,13 +9,14 @@
   .main-nav {
     display: flex;
     flex-direction: column;
-    gap: $gap-large;
+    gap: $gap-xl;
     .nav-logo {
       border-bottom: $border;
       padding-bottom: $gap-medium;
       display: flex;
       align-items: center;
       gap: $gap-medium;
+      color: $primary-color;
       .nav-title {
         font-weight: $weight-bold;
       }
@@ -23,17 +24,17 @@
     .settings-wrapper {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: $gap-medium;
       .nav-dark {
         width: 60px;
         box-shadow: 0 0.188em 1.55em rgb(156, 156, 156);
         border-radius: 20px;
         position: relative;
         padding: 5px 6px;
-        background-color: rgb(156, 156, 156);
+        background-color: $fifth-color;
         cursor: pointer;
         direction: ltr;
-  
+
         .dark-toggle {
           display: flex;
           align-items: center;
@@ -59,10 +60,10 @@
         border-radius: 20px;
         position: relative;
         padding: 5px 6px;
-        background-color: rgb(156, 156, 156);
+        background-color: $fifth-color;
         cursor: pointer;
         direction: ltr;
-  
+
         .lang-toggle {
           display: flex;
           align-items: center;
@@ -86,18 +87,38 @@
     }
     .nav-links {
       display: flex;
-      gap: 10px;
+      gap: $gap-large;
       flex-direction: column;
       width: 100%;
+      .logout-btn {
+        background-color: $primary-color;
+        border: none;
+        border-radius: $border-radius;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px;
+        cursor: pointer;
+        gap: $gap-small;
+        font-size: $font-size-base;
+        transition: all 0.25s ease;
+        &:hover {
+          background-color: $fifth-color;
+        }
+      }
       .nav-link {
-        color: black;
+        color: $primary-color;
         text-decoration: none;
         display: flex;
-        gap: 10px;
+        gap: $gap-medium;
         align-items: center;
       }
       .active {
         color: $secondary-color;
+        font-weight: bold;
+        background-color: $forth-color;
+        padding: 3px 5px;
+        border-radius: $border-radius;
       }
       .avatar-container {
         width: 100%;
@@ -120,9 +141,11 @@
           display: flex;
           flex-direction: column;
           .avatar-email {
+            color: $primary-color;
           }
           .avatar-username {
             font-weight: bold;
+            color: $primary-color;
           }
         }
       }

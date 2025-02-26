@@ -10,6 +10,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { IoMdCloseCircleOutline } from "react-icons/io";
 import { useEffect, useState } from "react";
 import { GiMoneyStack } from "react-icons/gi";
+import { IoLogOutOutline } from "react-icons/io5";
 import { logoutUser, getUserById } from "../../services/api/user";
 import Avatar from "./Avatar";
 import { IRegisterForm } from "../../interfaces/user";
@@ -140,8 +141,8 @@ const Nav = ({
                 </NavLink>
               )}
 
-              <button onClick={onLogout}>
-                <GiMoneyStack fontSize={24} />
+              <button className="logout-btn" onClick={onLogout}>
+                <IoLogOutOutline fontSize={24} />
                 <span> {t("NAV.LINK_LOGOUT")}</span>
               </button>
             </>

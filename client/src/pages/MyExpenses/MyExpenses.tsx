@@ -1,9 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { ExpenseType, IExpenseForm } from "../../interfaces/expense";
 import { IoMdAddCircleOutline } from "react-icons/io";
 import {
@@ -22,6 +17,7 @@ import MyStats from "./components/MyStats";
 import { FaSearch } from "react-icons/fa";
 import { debounce } from "../../utils/utils";
 import { useTranslation } from "react-i18next";
+import { toast } from "react-toastify";
 
 const MyExpenses = () => {
   const { t } = useTranslation();
@@ -49,6 +45,7 @@ const MyExpenses = () => {
         await updateExpenseById(selectedId, expenseForm);
       } else await createExpense(expenseForm);
       await updateList();
+      toast.success("Expense Added Successfully");
     } catch (error) {
       console.log(error);
     }
@@ -127,14 +124,12 @@ const MyExpenses = () => {
           </button>
         )}
       </>
-      {expenses ? (
+      {expenses && expenses.length !== 0 && (
         <MyExpensesList
           expenses={expenses}
           setExpenses={setExpenses}
           getSingleExpense={getSingleExpense}
         />
-      ) : (
-        <Loader />
       )}
     </div>
   );

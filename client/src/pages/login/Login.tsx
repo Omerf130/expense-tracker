@@ -6,9 +6,10 @@ import { useNavigate, useOutletContext } from "react-router";
 import { OutletContext } from "../../interfaces/global";
 import { getTokenAndPayload } from "../../utils/utils";
 import { GoogleLogin, CredentialResponse } from "@react-oauth/google";
+import { toast } from "react-toastify";
 
 const Login = () => {
-  const { auth, setAuth } = useOutletContext<OutletContext>();
+  const { setAuth } = useOutletContext<OutletContext>();
   const navigate = useNavigate();
 
   const initialState = { userName: "", password: "" };
@@ -23,13 +24,13 @@ const Login = () => {
         setAuth({token, userPayload});
         navigate("/myExpenses");
       }
+      toast.success("User Logged in Successfuly ")
     } catch (error) {
       console.log(error);
     }
   };
 
   const handleGoogleLoginSuccess = async (credentialResponse: CredentialResponse) => {
-    console.log(credentialResponse)
     if (credentialResponse.credential && credentialResponse.clientId) {
       try {
          await googleLoginUser({ credential: credentialResponse.credential, client_id: credentialResponse.clientId });
@@ -38,6 +39,7 @@ const Login = () => {
           setAuth({token, userPayload});
           navigate("/myExpenses");
         }
+        toast.success("User Logged in Successfuly ")
       } catch (error) {
         console.error("Google login failed:", error);
       }

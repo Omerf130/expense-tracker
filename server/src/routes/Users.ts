@@ -9,8 +9,8 @@ router.post("/login", login);
 router.post("/logout", logout);
 router.post("/googleLogin", googleLogin)
 router.get("/",requireAdminAuth, getAllUsers);
-router.get("/:id", getUserById)
-router.delete("/", deleteUserById);
-router.put("/", updateUserById);
+router.get("/:id", getUserById) 
+router.delete("/:id",requireAdminAuth, deleteUserById);
+router.put("/:id", updateUserById);
 
 export default router;
