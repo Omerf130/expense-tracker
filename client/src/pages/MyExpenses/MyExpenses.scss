@@ -15,7 +15,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    background-color: rgba(0,0,0,0.2);
+    background-color: rgba(0, 0, 0, 0.2);
     color: #fff;
     padding: 5px;
     input {
@@ -26,31 +26,46 @@
       outline: none;
       font-size: $font-md;
       &::placeholder {
-        color: rgba(255,255,255,0.7);
+        color: rgba(255, 255, 255, 0.7);
       }
     }
   }
   .my-expense-form {
-    border: 2px solid $btn-color-light;
+    border: 2px solid $third-color;
     border-radius: 8px;
     padding: 15px 20px;
     display: flex;
     flex-direction: column;
     gap: 15px;
+    width: 70%;
+    box-shadow: $shadow-bold;
     & > * {
       color: rgb(175, 175, 175);
     }
     .form-inputs {
       display: flex;
       gap: 20px;
+      .select-wrapper {
+        width: 100%;
+        .css-13cymwt-control {
+          background-color: #608bc1;
+          .css-1jqq78o-placeholder {
+            color: #fff;
+          }
+          .css-19bb58m input {
+            background-color: #608bc1;
+          }
+        }
+      }
     }
     .form-input {
       font-size: 20px;
       outline: none;
       padding-bottom: 5px;
+      background: none;
       border: none;
-      border-bottom: 2px solid $btn-color-light;
-      color: rgb(104, 104, 104);
+      border-bottom: 2px solid $third-color;
+      color:$six-color;
     }
     .radio-inputs {
       display: flex;
@@ -69,21 +84,21 @@
         text-align: center;
         flex: 1;
         font-size: 24px;
-        border: 2px solid $btn-color-light;
+        border: 2px solid $third-color;
         border-radius: 8px;
         padding: 5px 10px;
         display: flex;
         align-items: center;
         gap: 10px;
         background-color: $primary-color;
-        color: $btn-color-light;
+        color: $third-color;
         transition: all 0.3s ease;
         cursor: pointer;
         display: flex;
         justify-content: center;
         &:hover {
           border: 2px solid $primary-color;
-          background-color: $btn-color-light;
+          background-color: $third-color;
           color: $primary-color;
         }
       }
@@ -91,31 +106,32 @@
   }
   .add-expense-btn {
     font-size: 30px;
-    border: 2px solid $btn-color-light;
+    border: 2px solid $third-color;
     border-radius: 8px;
     padding: 5px 10px;
     display: flex;
     align-items: center;
     gap: 10px;
     background-color: $primary-color;
-    color: $btn-color-light;
+    color: $third-color;
     transition: all 0.3s ease;
     cursor: pointer;
     &:hover {
       border: 2px solid $primary-color;
-      background-color: $btn-color-light;
+      background-color: $third-color;
       color: $primary-color;
     }
   }
   .my-expense-list {
-    border: 2px solid $btn-color-light;
-    width: 70%;
+    border: 2px solid $third-color;
+    width: 80%;
     border-radius: 8px;
     padding: 20px;
-    box-shadow: shadow;
+    box-shadow: $shadow-bold;
     display: flex;
     gap: 15px;
     flex-direction: column;
+    color: $six-color;
     .my-expense-item {
       display: flex;
       align-items: center;
@@ -133,6 +149,13 @@
       }
       .item-category {
         flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        & :first-child {
+          display: flex;
+          align-items: center;
+        }
       }
       .item-btns {
         flex: 1;
@@ -141,7 +164,7 @@
         border-radius: 6px;
         color: #fff;
         padding: 5px 8px;
-        box-shadow: shadow;
+        box-shadow: $shadow-bold;
         flex: 2;
         text-align: center;
       }
@@ -168,7 +191,7 @@
           border-radius: 6px;
           border: none;
           padding: 2px 8px;
-          box-shadow: shadow;
+          box-shadow: $shadow-bold;
           color: #fff;
           display: flex;
           align-items: center;
@@ -185,6 +208,7 @@
   .my-stats-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 100%;
     padding: 50px 20px;
     gap: 15px;
@@ -198,6 +222,8 @@
       gap: 118px;
       align-items: center;
       padding-bottom: 20px;
+      justify-content: space-between;
+      width: 80%;
       .total-left {
         display: flex;
         flex-direction: column;
@@ -205,6 +231,7 @@
         .left-title {
           font-size: $font-md;
           font-weight: bold;
+          width: max-content;
         }
         .left-sum {
           font-size: $font-sm;
@@ -212,7 +239,7 @@
       }
       .total-right {
         display: flex;
-        width: 500px;
+        width: 80%;
         height: 10px;
         background-color: rgba(0, 0, 0, 0.1);
         border-radius: 15px;
@@ -251,7 +278,7 @@
       display: flex;
       gap: 50px;
       justify-content: space-between;
-      width: 700px;
+      width: 80%;
       font-size: $font-sm;
       font-weight: bold;
       .list-item {

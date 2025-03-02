@@ -42,6 +42,8 @@ const MyStats = ({ expenses }: MyStatsProps) => {
     setTotal(totalValue);
   };
 
+  console.log(expenses)
+
   return (
     <div className="my-stats-container">
       <div className="my-stats-header">{SUMMARY_TITLE}</div>

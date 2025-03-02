@@ -1,16 +1,68 @@
-import { IExpense } from "../../../interfaces/expense";
+import { IExpense, TCategories } from "../../../interfaces/expense";
 import { MdOutlineModeEdit } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { PiCoinsLight } from "react-icons/pi";
 import { deleteExpenseById } from "../../../services/api/expenses";
 import { toast } from "react-toastify";
+import {
+  FaHome,
+  FaBolt,
+  FaShoppingCart,
+  FaBus,
+  FaHeartbeat,
+  FaUtensils,
+  FaFilm,
+  FaTshirt,
+  FaDumbbell,
+  FaPlane,
+  FaMoneyBillWave,
+  FaChartLine,
+  FaGraduationCap,
+  FaGift,
+  FaTools,
+  FaPaw,
+  FaBaby,
+  FaCar,
+  FaBalanceScale,
+  FaEllipsisH,
+} from "react-icons/fa";
+
+const SIZE = 18;
+
+const iconMap: Record<TCategories, JSX.Element> = {
+  "": <FaEllipsisH size={SIZE} />,
+  Housing: <FaHome size={SIZE}/>,
+  Utilities: <FaBolt size={SIZE}/>,
+  Groceries: <FaShoppingCart size={SIZE}/>,
+  Transportation: <FaBus size={SIZE}/>,
+  Healthcare: <FaHeartbeat size={SIZE}/>,
+  "Dining Out": <FaUtensils size={SIZE}/>,
+  Entertainment: <FaFilm size={SIZE}/>,
+  Shopping: <FaTshirt size={SIZE}/>,
+  "Fitness & Wellness": <FaDumbbell size={SIZE}/>,
+  "Travel & Vacations": <FaPlane size={SIZE}/>,
+  "Debt Payments": <FaMoneyBillWave size={SIZE}/>,
+  "Investments & Savings": <FaChartLine size={SIZE}/>,
+  Education: <FaGraduationCap size={SIZE}/>,
+  "Gifts & Donations": <FaGift size={SIZE}/>,
+  "Home Maintenance": <FaTools size={SIZE}/>,
+  Pets: <FaPaw size={SIZE}/>,
+  Childcare: <FaBaby size={SIZE}/>,
+  "Vehicle Expenses": <FaCar size={SIZE}/>,
+  "Legal & Professional Services": <FaBalanceScale size={SIZE}/>,
+  Miscellaneous: <FaEllipsisH size={SIZE}/>,
+};
 
 interface MyExpensesListProps {
   expenses: IExpense[];
   setExpenses: React.Dispatch<React.SetStateAction<IExpense[] | null>>;
-  getSingleExpense: (id: string) => Promise<void>
+  getSingleExpense: (id: string) => Promise<void>;
 }
-const MyExpensesList = ({ expenses, setExpenses, getSingleExpense }: MyExpensesListProps) => {
+const MyExpensesList = ({
+  expenses,
+  setExpenses,
+  getSingleExpense,
+}: MyExpensesListProps) => {
   const handleDelete = async (id: string) => {
     const isConfirmed = window.confirm(
       "Are you sure you want to delete this expense?"
@@ -22,19 +74,27 @@ const MyExpensesList = ({ expenses, setExpenses, getSingleExpense }: MyExpensesL
     }
   };
 
-
   return (
     <div className="my-expense-list">
       {expenses.map(({ _id, title, category, amount, expenseType }) => (
-        <div className={`my-expense-item ${expenseType.toLowerCase()}`} key={_id}>
+        <div
+          className={`my-expense-item ${expenseType.toLowerCase()}`}
+          key={_id}
+        >
           <div className="item-title">{title}</div>
           <div className="item-amount">
             <PiCoinsLight /> {amount} ₪
           </div>
-          <div className="item-category">{category}</div>
+          <div className="item-category">
+            <span>{iconMap[category]}</span>
+            <span>{category}</span>
+          </div>
           <div className="item-type">{expenseType}</div>
           <div className="item-btns">
-            <button className="btn btn-edit" onClick={() => getSingleExpense(_id)}>
+            <button
+              className="btn btn-edit"
+              onClick={() => getSingleExpense(_id)}
+            >
               <MdOutlineModeEdit />
             </button>
             <button
