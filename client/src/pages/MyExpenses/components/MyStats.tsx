@@ -12,6 +12,7 @@ const MyStats = ({ expenses }: MyStatsProps) => {
   const { t } = useTranslation();
   const { SUMMARY_TITLE, LEFT_TOTAL } = CONSTS.EXPENSES;
   const [total, setTotal] = useState(0);
+  const sum = expenses.reduce((acc, curr) => acc+= curr.amount ,0);
   const totalExpense = expenses
     .filter((curr) => curr.expenseType === "EXPENSE")
     .reduce((acc, curr) => (acc += curr.amount), 0);
@@ -25,13 +26,14 @@ const MyStats = ({ expenses }: MyStatsProps) => {
     .filter((curr) => curr.expenseType === "SAVINGS")
     .reduce((acc, curr) => (acc += curr.amount), 0);
 
+
   useEffect(() => {
     handleTotal();
   }, [expenses]);
 
   const handleTotal = () => {
     let totalValue = 0;
-    expenses.forEach((curr, i) => {
+    expenses.forEach((curr) => {
       if (curr.expenseType === "EXPENSE") {
         totalValue -= curr.amount;
       } else {
@@ -41,8 +43,6 @@ const MyStats = ({ expenses }: MyStatsProps) => {
 
     setTotal(totalValue);
   };
-
-  console.log(expenses)
 
   return (
     <div className="my-stats-container">
@@ -56,27 +56,27 @@ const MyStats = ({ expenses }: MyStatsProps) => {
           <div className="total-right">
             <div
               className="right right-income"
-              style={{ width: `${(totalIncome / total) * 100}%` }}
+              style={{ width: `${(totalIncome / sum) * 100}%` }}
             >
-              <div>Income</div>
+              <div className="subtitle">{`Income ${((totalIncome / sum) * 100).toFixed(1)}%`}</div>
             </div>
             <div
               className="right right-expense"
-              style={{ width: `${Math.abs((totalExpense / total) * 100)}%` }}
+              style={{ width: `${Math.abs((totalExpense / sum) * 100)}%` }}
             >
-              <div>Expense</div>
+              <div className="subtitle">{`Expense ${((totalExpense / sum) * 100).toFixed(1)}%`}</div>
             </div>
             <div
               className="right right-investment"
-              style={{ width: `${(totalInvestment / total) * 100}%` }}
+              style={{ width: `${(totalInvestment / sum) * 100}%` }}
             >
-              <div>Investment</div>
+              <div className="subtitle">{`Investment ${((totalInvestment / sum) * 100).toFixed(1)}%`}</div>
             </div>
             <div
               className="right right-savings"
-              style={{ width: `${(totalSavings / total) * 100}%` }}
+              style={{ width: `${(totalSavings / sum) * 100}%` }}
             >
-              <div>Savings</div>
+              <div className="subtitle">{`Savings ${((totalSavings / sum) * 100).toFixed(1)}%`}</div>
             </div>
           </div>
         )}

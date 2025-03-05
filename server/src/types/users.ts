@@ -23,4 +23,4 @@ export interface AuthRequest extends Request {
   userId?: string
 }
 
-export type IRole = "basic" | "admin"
+export type IRole = "basic" | "admin" | "pro"

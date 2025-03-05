@@ -12,7 +12,8 @@
     "LINK_LOGOUT": "התנתקות",
     "NAV_LOGO": "Expense Tracker",
     "LINK_MY_EXPENSES": "ההוצאות שלי",
-    "ADMIN": "admin"
+    "ADMIN": "admin",
+    "ANALYTICS": "סטטיסטיקה"
   },
   "EXPENSES": {
     "DELETE_BTN": "מחיקה",
@@ -30,10 +31,10 @@
     "Add New Transaction": "הוסף פעולה חדשה"
   },
   "MYEXPENSEFORM": {
-    "Income": "הכנסה",
-    "Expense": "הוצאה",
-    "Investment": "השקעות",
-    "Savings": "חסכונות",
+    "INCOME": "הכנסה",
+    "EXPENSE": "הוצאה",
+    "INVESTMENT": "השקעות",
+    "SAVINGS": "חסכונות",
     "Cancel": "בטל",
     "Title": "תיאור פריט",
     "Category": "קטגוריה"

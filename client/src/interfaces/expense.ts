@@ -9,25 +9,17 @@ export type ExpenseType = "INCOME" | "EXPENSE" | "INVESTMENT" | "SAVINGS";
   export type TCategories =
     | ""
     | "Housing"
-    | "Utilities"
     | "Groceries"
-    | "Transportation"
     | "Healthcare"
-    | "Dining Out"
-    | "Entertainment"
+    | "Dining Out & Entertainment"
     | "Shopping"
     | "Fitness & Wellness"
     | "Travel & Vacations"
-    | "Debt Payments"
-    | "Investments & Savings"
-    | "Education"
-    | "Gifts & Donations"
+    | "Investments" 
+    | "Savings"
     | "Home Maintenance"
-    | "Pets"
-    | "Childcare"
     | "Vehicle Expenses"
-    | "Legal & Professional Services"
-    | "Miscellaneous";
+    | "Others";
 
 export interface IExpense extends IExpenseForm {
   _id: string;

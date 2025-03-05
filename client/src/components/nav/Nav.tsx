@@ -16,23 +16,24 @@ import Avatar from "./Avatar";
 import { IRegisterForm } from "../../interfaces/user";
 import { useTranslation } from "react-i18next";
 import { RiAdminLine } from "react-icons/ri";
+import { IoStatsChartSharp } from "react-icons/io5";
 
 interface NavProps {
   theme: TTheme;
-  onToggleTheme: (theme: TTheme) => void;
-  auth: IAuth;
-  setAuth: React.Dispatch<React.SetStateAction<IAuth>>;
-  onToggleLanguage: (lng: TLanguage) => void;
   lang: TLanguage;
+  auth: IAuth;
+  onToggleTheme: (theme: TTheme) => void;
+  onToggleLanguage: (lng: TLanguage) => void;
+  setAuth: React.Dispatch<React.SetStateAction<IAuth>>;
 }
 
 const Nav = ({
-  onToggleTheme,
   theme,
   auth,
+  lang,
+  onToggleTheme,
   setAuth,
   onToggleLanguage,
-  lang,
 }: NavProps) => {
   const [isMainNavOpen, setIsMainNavOpen] = useState(window.innerWidth > 768);
   const [userDetails, setUserDetails] = useState<IRegisterForm | null>(null);
@@ -82,7 +83,7 @@ const Nav = ({
   const toggleLang = (lang: TLanguage) => {
     onToggleLanguage(lang);
     localStorage.setItem("lang", lang);
-  }
+  };
 
   return (
     <nav className={`nav-container ${isMainNavOpen ? "open" : "close"}`}>
@@ -140,6 +141,18 @@ const Nav = ({
                   <span> {t("NAV.ADMIN")}</span>
                 </NavLink>
               )}
+              {(auth.userPayload?.role === "admin" ||
+                auth.userPayload?.role === "pro") && (
+                <NavLink
+                  to="/analytics"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link active" : "nav-link"
+                  }
+                >
+                  <IoStatsChartSharp fontSize={24} />
+                  <span> {t("NAV.ANALYTICS")}</span>
+                </NavLink>
+              )}
 
               <button className="logout-btn" onClick={onLogout}>
                 <IoLogOutOutline fontSize={24} />
@@ -175,6 +188,15 @@ const Nav = ({
               >
                 <SiGnuprivacyguard fontSize={24} />
                 <span> {t("NAV.LINK_REGISTER")}</span>
+              </NavLink>
+              <NavLink
+                to="/analytics"
+                className={({ isActive }) =>
+                  isActive ? "nav-link active" : "nav-link"
+                }
+              >
+                <IoStatsChartSharp fontSize={24} />
+                <span> {t("NAV.ANALYTICS")}</span>
               </NavLink>
             </>
           )}

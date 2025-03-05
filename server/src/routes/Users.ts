@@ -1,5 +1,5 @@
 import express from "express";
-import { register, deleteUserById, getAllUsers, updateUserById, login, logout, getUserById, googleLogin } from "../controllers/Users";
+import { register, deleteUserById, getAllUsers, login, logout, getUserById, googleLogin, updatedUserRoleById } from "../controllers/Users";
 import { requireAdminAuth } from "../middlewares/requireAuth";
 
 const router = express.Router();
@@ -11,6 +11,6 @@ router.post("/googleLogin", googleLogin)
 router.get("/",requireAdminAuth, getAllUsers);
 router.get("/:id", getUserById) 
 router.delete("/:id",requireAdminAuth, deleteUserById);
-router.put("/:id", updateUserById);
+router.patch("/:id",requireAdminAuth, updatedUserRoleById);
 
 export default router;

@@ -70,7 +70,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
     }
 
     const token = jwt.sign(
-      { _id: user._id, role: "basic" },
+      { _id: user._id, role: user.role },
       "dsajdjksadkjsahdas",
       { expiresIn: "3d" }
     );
@@ -176,6 +176,20 @@ export const deleteUserById = async (req: Request, res: Response) => {
     res.status(400).json({ message: error.message });
   }
 };
-export const updateUserById = async (req: Request, res: Response) => {
-  console.log("put request succeded");
+
+export const updatedUserRoleById = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const {role} = req.body; 
+
+  try {
+    const updateRole = await User.findByIdAndUpdate(id, {role});
+    if(!updateRole) {
+      res.status(404).json({message:"User not found"});
+      return;
+    }
+
+    res.status(200).json({message: "User role updated successfully"});
+  } catch (error) {
+    res.status(400).json({message: error})
+  }
 };

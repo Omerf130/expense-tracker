@@ -3,24 +3,15 @@ import { useTranslation } from "react-i18next";
 import Select from "react-select";
 import {
   FaHome,
-  FaBolt,
   FaShoppingCart,
-  FaBus,
   FaHeartbeat,
   FaUtensils,
-  FaFilm,
   FaTshirt,
   FaDumbbell,
   FaPlane,
-  FaMoneyBillWave,
   FaChartLine,
-  FaGraduationCap,
-  FaGift,
   FaTools,
-  FaPaw,
-  FaBaby,
   FaCar,
-  FaBalanceScale,
   FaEllipsisH,
 } from "react-icons/fa";
 
@@ -41,12 +32,9 @@ interface IOption {
 
 const expensesOptions: IOption[] = [
   { label: "Housing", value: "Housing", icon: <FaHome /> },
-  { label: "Utilities", value: "Utilities", icon: <FaBolt /> },
   { label: "Groceries", value: "Groceries", icon: <FaShoppingCart /> },
-  { label: "Transportation", value: "Transportation", icon: <FaBus /> },
   { label: "Healthcare", value: "Healthcare", icon: <FaHeartbeat /> },
-  { label: "Dining Out", value: "Dining Out", icon: <FaUtensils /> },
-  { label: "Entertainment", value: "Entertainment", icon: <FaFilm /> },
+  { label: "Dining Out & Entertainment", value: "Dining Out & Entertainment", icon: <FaUtensils /> },
   { label: "Shopping", value: "Shopping", icon: <FaTshirt /> },
   {
     label: "Fitness & Wellness",
@@ -58,24 +46,19 @@ const expensesOptions: IOption[] = [
     value: "Travel & Vacations",
     icon: <FaPlane />,
   },
-  { label: "Debt Payments", value: "Debt Payments", icon: <FaMoneyBillWave /> },
   {
-    label: "Investments & Savings",
-    value: "Investments & Savings",
+    label: "Investments",
+    value: "Investments",
     icon: <FaChartLine />,
   },
-  { label: "Education", value: "Education", icon: <FaGraduationCap /> },
-  { label: "Gifts & Donations", value: "Gifts & Donations", icon: <FaGift /> },
-  { label: "Home Maintenance", value: "Home Maintenance", icon: <FaTools /> },
-  { label: "Pets", value: "Pets", icon: <FaPaw /> },
-  { label: "Childcare", value: "Childcare", icon: <FaBaby /> },
-  { label: "Vehicle Expenses", value: "Vehicle Expenses", icon: <FaCar /> },
   {
-    label: "Legal & Professional Services",
-    value: "Legal & Professional Services",
-    icon: <FaBalanceScale />,
+    label: "Savings",
+    value: "Savings",
+    icon: <FaChartLine />,
   },
-  { label: "Miscellaneous", value: "Miscellaneous", icon: <FaEllipsisH /> },
+  { label: "Home Maintenance", value: "Home Maintenance", icon: <FaTools /> },
+  { label: "Vehicle Expenses", value: "Vehicle Expenses", icon: <FaCar /> },
+  { label: "Others", value: "Others", icon: <FaEllipsisH /> },
 ];
 
 const MyExpensesForm = ({

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { IGoogleLoginPayload, ILoginForm, IRegisterForm, IUserResponse, IUsersResponse } from "../../interfaces/user";
+import { IGoogleLoginPayload, ILoginForm, IRegisterForm, IUserResponse, IUsersResponse, TRole } from "../../interfaces/user";
 import { getTokenAndPayload } from "../../utils/utils";
 
 const BASE_URL = "http://localhost:8080/api/users";
@@ -70,6 +70,18 @@ export const deleteUserById = async (id: string) => {
       withCredentials: true,
     });
     return res.data as IUsersResponse
+    
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+export const updatedUserRoleById = async (role: TRole, id: string) => {
+  try {
+    const res = await axios.patch(`${BASE_URL}/${id}`, {role}, {
+      withCredentials: true,
+    });
+    return true;
     
   } catch (error) {
     console.log(error)

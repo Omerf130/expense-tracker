@@ -12,7 +12,8 @@
     "LINK_LOGOUT": "Logout",
     "NAV_LOGO": "Expense Tracker",
     "LINK_MY_EXPENSES": "My Expenses",
-    "ADMIN": "admin"
+    "ADMIN": "Admin",
+    "ANALYTICS": "Analytics"
   },
   "EXPENSES": {
     "DELETE_BTN": "Delete",
@@ -30,10 +31,10 @@
     "Add New Transaction": "Add New Transaction"
   },
   "MYEXPENSEFORM": {
-    "Income": "Income",
-    "Expense": "Expense",
-    "Investment": "Investment",
-    "Savings": "Savings",
+    "INCOME": "Income",
+    "EXPENSE": "Expense",
+    "INVESTMENT": "Investment",
+    "SAVINGS": "Savings",
     "Cancel": "cancel",
     "Title": "Title",
     "Category": "Category"

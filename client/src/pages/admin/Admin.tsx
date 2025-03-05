@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import "./Admin.scss";
-import { deleteUserById, getAllUsers } from "../../services/api/user";
-import { IUser } from "../../interfaces/user";
+import { deleteUserById, getAllUsers, updatedUserRoleById } from "../../services/api/user";
+import { IUser, TRole } from "../../interfaces/user";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
 const Admin = () => {
@@ -29,6 +29,10 @@ const Admin = () => {
     }
   };
 
+  const onDropdownChange = (e:ChangeEvent<HTMLSelectElement>, id:string) => {
+    updatedUserRoleById(e.target.value as TRole , id)
+  }
+
   return (
     <div className="admin-container">
       <div className="admin-header">Users</div>
@@ -51,7 +55,13 @@ const Admin = () => {
             </div>
             <div className="user-firstname">{user.firstName}</div>
             <div className="user-lastname">{user.lastName}</div>
-            <div className="user-role">{user.role}</div>
+            <div className="user-role">
+              <select name="" defaultValue={user.role} onChange={ (e) => onDropdownChange(e,user._id)}>
+                <option value="admin">Admin</option>
+                <option value="pro">Pro</option>
+                <option value="basic">Basic</option>
+              </select>
+            </div>
             <div className="user-delete" onClick={ () => handleDelete(user._id)}><RiDeleteBin6Line className="btn-delete" size={32}/></div>
           </div>
         ))}

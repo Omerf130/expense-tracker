@@ -10,6 +10,7 @@ import MyExpenses from "./pages/MyExpenses/MyExpenses.tsx";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import './assets/locales/i18n';
 import Admin from "./pages/admin/Admin.tsx";
+import Analytics from "./pages/analytics/Analytics.tsx";
 
   const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 
@@ -24,6 +25,7 @@ createRoot(document.getElementById("root")!).render(
             <Route path="/register" element={<Register />} />
             <Route path="/myExpenses" element={<MyExpenses />} />
             <Route path="/admin" element={<Admin/>}/>
+            <Route path="/analytics" element={<Analytics/>}/>
           </Route>
         </Routes>
       </BrowserRouter>
