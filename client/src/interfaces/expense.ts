@@ -9,7 +9,7 @@ export type ExpenseType = "INCOME" | "EXPENSE" | "INVESTMENT" | "SAVINGS";
   export type TCategories =
     | ""
     | "Housing"
-    | "Groceries"
+    // | "Groceries"
     | "Healthcare"
     | "Dining Out & Entertainment"
     | "Shopping"
@@ -17,7 +17,7 @@ export type ExpenseType = "INCOME" | "EXPENSE" | "INVESTMENT" | "SAVINGS";
     | "Travel & Vacations"
     | "Investments" 
     | "Savings"
-    | "Home Maintenance"
+    // | "Home Maintenance"
     | "Vehicle Expenses"
     | "Others";
 
@@ -36,4 +36,16 @@ export interface IExpenseResponse {
 export interface ISingleExpenseResponse {
   message: string;
   expense: IExpense;
+}
+
+export interface ICategories {
+  _id: string;
+  count: number;
+  totalAmount: number;
+}
+
+
+export interface ICategoriesResponse {
+  message: string;
+  list: ICategories[];
 }

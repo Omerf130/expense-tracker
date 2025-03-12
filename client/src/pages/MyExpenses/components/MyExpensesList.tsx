@@ -23,7 +23,7 @@ const SIZE = 18;
 const iconMap: Record<TCategories, JSX.Element> = {
   "": <FaEllipsisH size={SIZE} />,
   Housing: <FaHome size={SIZE}/>,
-  Groceries: <FaShoppingCart size={SIZE}/>,
+  // Groceries: <FaShoppingCart size={SIZE}/>,
   Healthcare: <FaHeartbeat size={SIZE}/>,
   "Dining Out & Entertainment": <FaUtensils size={SIZE}/>,
   Shopping: <FaTshirt size={SIZE}/>,
@@ -31,7 +31,7 @@ const iconMap: Record<TCategories, JSX.Element> = {
   "Travel & Vacations": <FaPlane size={SIZE}/>,
   "Investments": <FaChartLine size={SIZE}/>,
   "Savings": <FaChartLine size={SIZE}/>,
-  "Home Maintenance": <FaTools size={SIZE}/>,
+  // "Home Maintenance": <FaTools size={SIZE}/>,
   "Vehicle Expenses": <FaCar size={SIZE}/>,
   Others: <FaEllipsisH size={SIZE}/>,
 };

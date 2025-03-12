@@ -32,7 +32,7 @@ interface IOption {
 
 const expensesOptions: IOption[] = [
   { label: "Housing", value: "Housing", icon: <FaHome /> },
-  { label: "Groceries", value: "Groceries", icon: <FaShoppingCart /> },
+  // { label: "Groceries", value: "Groceries", icon: <FaShoppingCart /> },
   { label: "Healthcare", value: "Healthcare", icon: <FaHeartbeat /> },
   { label: "Dining Out & Entertainment", value: "Dining Out & Entertainment", icon: <FaUtensils /> },
   { label: "Shopping", value: "Shopping", icon: <FaTshirt /> },
@@ -56,7 +56,7 @@ const expensesOptions: IOption[] = [
     value: "Savings",
     icon: <FaChartLine />,
   },
-  { label: "Home Maintenance", value: "Home Maintenance", icon: <FaTools /> },
+  // { label: "Home Maintenance", value: "Home Maintenance", icon: <FaTools /> },
   { label: "Vehicle Expenses", value: "Vehicle Expenses", icon: <FaCar /> },
   { label: "Others", value: "Others", icon: <FaEllipsisH /> },
 ];

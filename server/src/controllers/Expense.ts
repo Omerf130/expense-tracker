@@ -25,6 +25,30 @@ export const getAllExpenses = async (req:AuthRequest, res:Response) => {
    }
 }
 
+export const getExpensesByCategories = async (req:AuthRequest, res:Response) => {
+   const userId = req.userId;
+
+   try {
+      const expensesByCategory = await Expense.aggregate([
+         { $match: { userId } },
+         { 
+            $group: {
+               _id: "$category", 
+               totalAmount: { $sum: "$amount" },
+               count: { $sum: 1 }
+            }
+         },
+         { $sort: { totalAmount: -1 } }
+      ]);
+
+      res.status(200).json({message:" Categories received successfully", list: expensesByCategory})
+      
+   } catch (error) {
+      res.status(400).json({message:error});
+   }
+
+}
+
 export const getExpenseById = async (req:Request, res:Response) => {
    const {id} = req.params;
    try {
