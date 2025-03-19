@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ICategoriesResponse, IExpenseForm, IExpenseResponse, ISingleExpenseResponse } from "../../interfaces/expense";
+import { ICategoriesResponse, IExpenseForm, IExpenseResponse, IExpenseTypeResponse, ISingleExpenseResponse } from "../../interfaces/expense";
 import { getTokenAndPayload } from "../../utils/utils";
 
 const BASE_URL = "http://localhost:8080/api/expenses";
@@ -82,6 +82,20 @@ export const getExpensesByCategories = async () => {
       }
     })
     return res.data as ICategoriesResponse;
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const getExpensesByExpenseType = async () => {
+  const {token} = getTokenAndPayload();
+  try {
+    const res = await axios.get(`${BASE_URL}/expenseType`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+    return res.data as IExpenseTypeResponse;
   } catch (error) {
     console.error(error)
   }

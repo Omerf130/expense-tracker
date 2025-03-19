@@ -18,22 +18,27 @@ import {
   FaEllipsisH,
 } from "react-icons/fa";
 
+interface IMonthObj {
+  month: string;
+  expenses: IExpense[];
+}
+
 const SIZE = 18;
 
 const iconMap: Record<TCategories, JSX.Element> = {
   "": <FaEllipsisH size={SIZE} />,
-  Housing: <FaHome size={SIZE}/>,
+  Housing: <FaHome size={SIZE} />,
   // Groceries: <FaShoppingCart size={SIZE}/>,
-  Healthcare: <FaHeartbeat size={SIZE}/>,
-  "Dining Out & Entertainment": <FaUtensils size={SIZE}/>,
-  Shopping: <FaTshirt size={SIZE}/>,
-  "Fitness & Wellness": <FaDumbbell size={SIZE}/>,
-  "Travel & Vacations": <FaPlane size={SIZE}/>,
-  "Investments": <FaChartLine size={SIZE}/>,
-  "Savings": <FaChartLine size={SIZE}/>,
+  Healthcare: <FaHeartbeat size={SIZE} />,
+  "Dining Out & Entertainment": <FaUtensils size={SIZE} />,
+  Shopping: <FaTshirt size={SIZE} />,
+  "Fitness & Wellness": <FaDumbbell size={SIZE} />,
+  "Travel & Vacations": <FaPlane size={SIZE} />,
+  Investments: <FaChartLine size={SIZE} />,
+  Savings: <FaChartLine size={SIZE} />,
   // "Home Maintenance": <FaTools size={SIZE}/>,
-  "Vehicle Expenses": <FaCar size={SIZE}/>,
-  Others: <FaEllipsisH size={SIZE}/>,
+  "Vehicle Expenses": <FaCar size={SIZE} />,
+  Others: <FaEllipsisH size={SIZE} />,
 };
 
 interface MyExpensesListProps {
@@ -57,35 +62,65 @@ const MyExpensesList = ({
     }
   };
 
+  const groupExpensesByMonth = (expenses: IExpense[]) => {
+    const grouped = expenses.reduce<Record<string, IExpense[]>>((acc, expense) => {
+        const month = new Date(expense.createdAt).toLocaleString("en-US", {
+          year: "numeric",
+          month: "long",
+        });
+
+        if (!acc[month]) {
+          acc[month] = [];
+        }
+
+        acc[month].push(expense);
+        return acc;
+      },
+      {}
+    );
+
+    return Object.entries(grouped).map(([month, expenses]) => ({month,expenses}));
+  };
+
+  const expensesByMonth: IMonthObj[] = groupExpensesByMonth(expenses);
+  console.log(expensesByMonth);
+
   return (
-    <div className="my-expense-list">
-      {expenses.map(({ _id, title, category, amount, expenseType }) => (
-        <div
-          className={`my-expense-item ${expenseType.toLowerCase()}`}
-          key={_id}
-        >
-          <div className="item-title">{title}</div>
-          <div className="item-amount">
-            <PiCoinsLight /> {amount} ₪
-          </div>
-          <div className="item-category">
-            <span>{iconMap[category]}</span>
-            <span>{category}</span>
-          </div>
-          <div className="item-type">{expenseType}</div>
-          <div className="item-btns">
-            <button
-              className="btn btn-edit"
-              onClick={() => getSingleExpense(_id)}
-            >
-              <MdOutlineModeEdit />
-            </button>
-            <button
-              className="btn btn-delete"
-              onClick={() => handleDelete(_id)}
-            >
-              <RiDeleteBin6Line />
-            </button>
+    <div className="my-expense-outer">
+      {expensesByMonth.map((monthObj) => (
+        <div className="my-expense-month" key={monthObj.month}>
+          <div className="my-expense-title">{monthObj.month}</div>
+          <div className="my-expense-list">
+            {monthObj.expenses.map(({ _id, title, category, amount, expenseType }) => (
+              <div
+                className={`my-expense-item ${expenseType.toLowerCase()}`}
+                key={_id}
+              >
+                <div className="item-title">{title}</div>
+                <div className="item-amount">
+                  <PiCoinsLight /> {amount} ₪
+                </div>
+                <div className="item-category">
+                  <span>{iconMap[category]}</span>
+                  <span>{category}</span>
+                </div>
+                <div className="item-type">{expenseType}</div>
+                <div className="item-btns">
+                  <button
+                    className="btn btn-edit"
+                    onClick={() => getSingleExpense(_id)}
+                  >
+                    <MdOutlineModeEdit />
+                  </button>
+                  <button
+                    className="btn btn-delete"
+                    onClick={() => handleDelete(_id)}
+                  >
+                    <RiDeleteBin6Line />
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       ))}

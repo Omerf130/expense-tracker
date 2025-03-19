@@ -65,7 +65,7 @@
       background: none;
       border: none;
       border-bottom: 2px solid $third-color;
-      color:$six-color;
+      color: $six-color;
     }
     .radio-inputs {
       display: flex;
@@ -122,85 +122,96 @@
       color: $primary-color;
     }
   }
-  .my-expense-list {
-    border: 2px solid $third-color;
+  .my-expense-outer {
     width: 80%;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: $shadow-bold;
     display: flex;
-    gap: 15px;
     flex-direction: column;
-    color: $six-color;
-    .my-expense-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 0;
-      border-bottom: 1px solid #777;
-      gap: 10px;
-      .item-title {
-        flex: 3;
-        font-size: $font-md;
+    gap: 20px;
+    .my-expense-month {
+      .my-expense-title {
+        font-weight: bold;
+        font-style: italic;
       }
-      .item-amount {
-        flex: 1;
-        min-width: fit-content;
-      }
-      .item-category {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        & :first-child {
-          display: flex;
-          align-items: center;
-        }
-      }
-      .item-btns {
-        flex: 1;
-      }
-      .item-type {
-        border-radius: 6px;
-        color: #fff;
-        padding: 5px 8px;
+      .my-expense-list {
+        border: 2px solid $third-color;
+        border-radius: 8px;
+        padding: 20px;
         box-shadow: $shadow-bold;
-        flex: 2;
-        text-align: center;
-      }
-      &.expense .item-type {
-        background-color: rgba(192, 8, 57, 0.525);
-      }
-      &.income .item-type {
-        background-color: rgba(44, 178, 44, 0.525);
-      }
-      &.investment .item-type {
-        background-color: rgba(94, 19, 156, 0.525);
-      }
-      &.savings .item-type {
-        background-color: rgba(205, 173, 98, 0.525);
-      }
-
-      .item-btns {
         display: flex;
-        gap: 20px;
-        height: 35px;
-        .btn {
-          cursor: pointer;
-          font-size: 20px;
-          border-radius: 6px;
-          border: none;
-          padding: 2px 8px;
-          box-shadow: $shadow-bold;
-          color: #fff;
+        gap: 15px;
+        flex-direction: column;
+        color: $six-color;
+        .my-expense-item {
           display: flex;
           align-items: center;
-        }
-        .btn-edit {
-          background-color: rgb(92, 177, 237);
-        }
-        .btn-delete {
-          background-color: rgba(192, 8, 57, 0.525);
+          justify-content: space-between;
+          padding: 15px 0;
+          border-bottom: 1px solid #777;
+          gap: 10px;
+          .item-title {
+            flex: 3;
+            font-size: $font-md;
+          }
+          .item-amount {
+            flex: 1;
+            min-width: fit-content;
+          }
+          .item-category {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            & :first-child {
+              display: flex;
+              align-items: center;
+            }
+          }
+          .item-btns {
+            flex: 1;
+          }
+          .item-type {
+            border-radius: 6px;
+            color: #fff;
+            padding: 5px 8px;
+            box-shadow: $shadow-bold;
+            flex: 2;
+            text-align: center;
+          }
+          &.expense .item-type {
+            background-color: rgba(192, 8, 57, 0.525);
+          }
+          &.income .item-type {
+            background-color: rgba(44, 178, 44, 0.525);
+          }
+          &.investment .item-type {
+            background-color: rgba(94, 19, 156, 0.525);
+          }
+          &.savings .item-type {
+            background-color: rgba(205, 173, 98, 0.525);
+          }
+
+          .item-btns {
+            display: flex;
+            gap: 20px;
+            height: 35px;
+            .btn {
+              cursor: pointer;
+              font-size: 20px;
+              border-radius: 6px;
+              border: none;
+              padding: 2px 8px;
+              box-shadow: $shadow-bold;
+              color: #fff;
+              display: flex;
+              align-items: center;
+            }
+            .btn-edit {
+              background-color: rgb(92, 177, 237);
+            }
+            .btn-delete {
+              background-color: rgba(192, 8, 57, 0.525);
+            }
+          }
         }
       }
     }
@@ -255,7 +266,7 @@
             left: 0;
           }
           .subtitle {
-           font-weight: bold;
+            font-weight: bold;
           }
           &:hover {
             div {

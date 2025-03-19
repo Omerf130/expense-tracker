@@ -49,3 +49,19 @@ export interface ICategoriesResponse {
   message: string;
   list: ICategories[];
 }
+
+export interface IExpenseTypeResponse {
+  message: string
+  list: IExpenseType[]
+}
+
+export interface IExpenseType {
+  expenseType: ExpenseType
+  last7Months: ILast7Months[]
+}
+
+export interface ILast7Months {
+  month:number
+  year:number
+  totalSum:number
+}
