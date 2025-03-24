@@ -3,14 +3,12 @@ import { useTranslation } from "react-i18next";
 import Select from "react-select";
 import {
   FaHome,
-  FaShoppingCart,
   FaHeartbeat,
   FaUtensils,
   FaTshirt,
   FaDumbbell,
   FaPlane,
   FaChartLine,
-  FaTools,
   FaCar,
   FaEllipsisH,
 } from "react-icons/fa";

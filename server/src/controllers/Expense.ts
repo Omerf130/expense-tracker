@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import { Expense } from "../db/schemas/Expense";
 import { startOfMonth, subMonths } from "date-fns";
 

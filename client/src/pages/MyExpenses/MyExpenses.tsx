@@ -28,8 +28,6 @@ const MyExpenses = () => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const searchRef = useRef<HTMLInputElement>(null);
 
-  // console.log(expenses)
-
   useEffect(() => {
     updateList();
   }, []);

@@ -2,7 +2,7 @@ import axios from "axios";
 import { ICategoriesResponse, IExpenseForm, IExpenseResponse, IExpenseTypeResponse, ISingleExpenseResponse } from "../../interfaces/expense";
 import { getTokenAndPayload } from "../../utils/utils";
 
-const BASE_URL = "http://localhost:8080/api/expenses";
+const BASE_URL = `${import.meta.env.VITE_API_URL}/api/expenses`;
 
 export const createExpense = async (registerForm: IExpenseForm) => {
   const {token} = getTokenAndPayload();

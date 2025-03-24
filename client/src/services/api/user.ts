@@ -2,7 +2,7 @@ import axios from "axios";
 import { IGoogleLoginPayload, ILoginForm, IRegisterForm, IUserResponse, IUsersResponse, TRole } from "../../interfaces/user";
 import { getTokenAndPayload } from "../../utils/utils";
 
-const BASE_URL = "http://localhost:8080/api/users";
+const BASE_URL = `${import.meta.env.VITE_API_URL}/api/users`;
 
 export const registerUser = async (registerForm: IRegisterForm) => {
   try {
@@ -78,7 +78,7 @@ export const deleteUserById = async (id: string) => {
 
 export const updatedUserRoleById = async (role: TRole, id: string) => {
   try {
-    const res = await axios.patch(`${BASE_URL}/${id}`, {role}, {
+    await axios.patch(`${BASE_URL}/${id}`, {role}, {
       withCredentials: true,
     });
     return true;

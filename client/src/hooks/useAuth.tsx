@@ -1,4 +1,3 @@
-// hooks/useAuth.ts
 import { useState, useEffect } from "react";
 import { IAuth } from "../interfaces/global";
 import { getTokenAndPayload } from "../utils/utils";

@@ -6,14 +6,12 @@ import { deleteExpenseById } from "../../../services/api/expenses";
 import { toast } from "react-toastify";
 import {
   FaHome,
-  FaShoppingCart,
   FaHeartbeat,
   FaUtensils,
   FaTshirt,
   FaDumbbell,
   FaPlane,
   FaChartLine,
-  FaTools,
   FaCar,
   FaEllipsisH,
 } from "react-icons/fa";

@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import "./Admin.scss";
 import { deleteUserById, getAllUsers, updatedUserRoleById } from "../../services/api/user";
 import { IUser, TRole } from "../../interfaces/user";
