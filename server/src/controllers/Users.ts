@@ -8,8 +8,6 @@ import { OAuth2Client } from "google-auth-library";
 import dotenv from "dotenv";
 dotenv.config();
 
-const secret = process.env.JWT_SECRET;
-
 export const getAllUsers = async (req: Request, res: Response) => {
   try {
     const list = await User.find();
@@ -73,13 +71,9 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
-    if (!secret) {
-      throw new Error("JWT secret is not defined.");
-    }
-
     const token = jwt.sign(
       { _id: user._id, role: user.role },
-      secret,
+      "dsajdjksadkjsahdas",
       { expiresIn: "3d" }
     );
 
@@ -133,13 +127,9 @@ export const googleLogin = async (
       user = await User.create(newUser);
     }
 
-    if (!secret) {
-      throw new Error("JWT secret is not defined.");
-    }
-
     const token = jwt.sign(
       { _id: user._id, role: user.role },
-      secret,
+      "dsajdjksadkjsahdas",
       { expiresIn: "3d" }
     );
 
