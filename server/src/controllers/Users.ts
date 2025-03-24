@@ -1,10 +1,14 @@
-import { NextFunction, Request, Response } from "express";
+import { Request, Response } from "express";
 import { IUserForm, IUserLoginForm } from "../types/users";
 import { User } from "../db/schemas/Users";
 import { Expense } from "../db/schemas/Expense";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { OAuth2Client } from "google-auth-library";
+import dotenv from "dotenv";
+dotenv.config();
+
+const secret = process.env.JWT_SECRET;
 
 export const getAllUsers = async (req: Request, res: Response) => {
   try {
@@ -69,9 +73,13 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       return;
     }
 
+    if (!secret) {
+      throw new Error("JWT secret is not defined.");
+    }
+
     const token = jwt.sign(
       { _id: user._id, role: user.role },
-      "dsajdjksadkjsahdas",
+      secret,
       { expiresIn: "3d" }
     );
 
@@ -125,9 +133,13 @@ export const googleLogin = async (
       user = await User.create(newUser);
     }
 
+    if (!secret) {
+      throw new Error("JWT secret is not defined.");
+    }
+
     const token = jwt.sign(
       { _id: user._id, role: user.role },
-      "dsajdjksadkjsahdas",
+      secret,
       { expiresIn: "3d" }
     );
 
