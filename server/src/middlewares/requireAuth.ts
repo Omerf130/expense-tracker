@@ -9,14 +9,14 @@ export interface AuthRequest extends Request {
 
 
 export const requireAuth = (req: AuthRequest, res: Response, next:NextFunction) => {
-  const {authorization} = req.headers;
+  const {Authorization} = req.headers;
 
-  if(!authorization) {
+  if(!Authorization) {
     res.status(401).json({message: "Authorization required"})
     return;
   }
 
-  const token = authorization.split(" ")[1];
+  const token = (Authorization as string).split(" ")[1];
 
   try {
     //@ts-ignore
