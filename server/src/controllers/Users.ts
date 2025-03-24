@@ -8,6 +8,8 @@ import { OAuth2Client } from "google-auth-library";
 import dotenv from "dotenv";
 dotenv.config();
 
+const isProduction = process.env.NODE_ENV === "production";
+
 export const getAllUsers = async (req: Request, res: Response) => {
   try {
     const list = await User.find();
@@ -79,9 +81,9 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
     res
       .cookie("authToken", token, {
-        httpOnly: false,
-        secure: false,
-        sameSite: "strict",
+        httpOnly: isProduction,                 // Prevent client-side access
+        secure: isProduction,           // Secure cookies for HTTPS (Vercel)
+        sameSite: isProduction ? "none" : "strict", // Cross-origin support on Vercel
         maxAge: 24 * 60 * 60 * 1000,
       })
       .status(200)
