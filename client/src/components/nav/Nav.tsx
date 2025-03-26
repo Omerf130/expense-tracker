@@ -1,6 +1,5 @@
 import { NavLink, useNavigate } from "react-router";
 import { RiMoneyCnyCircleLine } from "react-icons/ri";
-import "./Nav.scss";
 import { IoHomeOutline } from "react-icons/io5";
 import { IoLogInOutline } from "react-icons/io5";
 import { SiGnuprivacyguard } from "react-icons/si";
@@ -17,6 +16,7 @@ import { IRegisterForm } from "../../interfaces/user";
 import { useTranslation } from "react-i18next";
 import { RiAdminLine } from "react-icons/ri";
 import { IoStatsChartSharp } from "react-icons/io5";
+import "./Nav.scss";
 
 interface NavProps {
   theme: TTheme;
@@ -64,7 +64,7 @@ const Nav = ({
   const onLogout = async () => {
     try {
       await logoutUser();
-      setAuth({ token: null, userPayload: null });
+      setAuth({ userPayload: null });
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -117,7 +117,7 @@ const Nav = ({
           </div>
         </div>
         <div className="nav-links">
-          {auth.token ? (
+          {auth.userPayload?._id ? (
             <>
               {userDetails && <Avatar userDetails={userDetails} />}
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Login.scss";
 import { ILoginForm } from "../../interfaces/user";
-import { getUserDetails, googleLoginUser, loginUser } from "../../services/api/user";
+import { googleLoginUser, loginUser } from "../../services/api/user";
 import { useNavigate, useOutletContext } from "react-router";
 import { OutletContext } from "../../interfaces/global";
 import { getTokenAndPayload } from "../../utils/utils";
@@ -19,11 +19,10 @@ const Login = () => {
     e.preventDefault();
     try {
       await loginUser(loginForm);
-      // const { token, userPayload } = getTokenAndPayload();
-      const userDetails = await getUserDetails();
-      console.log(userDetails)
-      if (userDetails?.user._id) {
-        // setAuth({token, userPayload});
+      const { userPayload } = await getTokenAndPayload();
+      console.log(userPayload)
+      if (userPayload?._id) {
+        setAuth({ userPayload});
         navigate("/myExpenses");
       }
       toast.success("User Logged in Successfuly ")
@@ -36,9 +35,9 @@ const Login = () => {
     if (credentialResponse.credential && credentialResponse.clientId) {
       try {
          await googleLoginUser({ credential: credentialResponse.credential, client_id: credentialResponse.clientId });
-        const { token, userPayload } = getTokenAndPayload();
-        if (token) {
-          setAuth({token, userPayload});
+        const { userPayload } = await  getTokenAndPayload();
+        if (userPayload?._id) {
+          setAuth({ userPayload});
           navigate("/myExpenses");
         }
         toast.success("User Logged in Successfuly ")

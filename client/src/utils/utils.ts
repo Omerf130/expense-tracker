@@ -1,18 +1,17 @@
-import Cookies from "js-cookie";
-import { jwtDecode } from "jwt-decode";
-import { IUserPayload } from "../interfaces/user";
+import { getUserDetails } from "../services/api/user";
 
-export const getTokenAndPayload = () => {
-  const token = Cookies.get("authToken");
-  if (token) {
+export const getTokenAndPayload = async () => {
+  const userDetails = await getUserDetails();
+
+  if (userDetails?.user._id) {
+    const {_id, role} = userDetails.user;
     try {
-      const decoded = jwtDecode<IUserPayload>(token);
-      return { token, userPayload: decoded };
+      return { userPayload: {_id,role} };
     } catch (error) {
       console.error("Invalid token:", error);
     }
   }
-  return { token: null, userPayload: null };
+  return { userPayload: null };
 };
 
 export const debounce = (func: any, delay: number = 1000) => {

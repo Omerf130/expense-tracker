@@ -3,13 +3,17 @@ import { IAuth } from "../interfaces/global";
 import { getTokenAndPayload } from "../utils/utils";
 
 const useAuth = () => {
-  const [auth, setAuth] = useState<IAuth>({ token: null, userPayload: null });
+  const [auth, setAuth] = useState<IAuth>({ userPayload: null });
 
   useEffect(() => {
-    const { token, userPayload } = getTokenAndPayload();
-    if (token) {
-      setAuth({ token, userPayload });
-    }
+    const fetchAuth = async () => {
+      const { userPayload } = await getTokenAndPayload();
+      if (userPayload) {
+        setAuth({ userPayload });
+      }
+    };
+
+    fetchAuth();
   }, []);
 
   return { auth, setAuth };

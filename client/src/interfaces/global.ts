@@ -5,7 +5,6 @@ export type TTheme = "light" | "dark";
 export type TLanguage = "he" | "en";
 
 export interface IAuth {
-  token: string | null
   userPayload: IUserPayload | null
 }
 
