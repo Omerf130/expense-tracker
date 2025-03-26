@@ -1,9 +1,10 @@
 import express from "express";
-import { register, deleteUserById, getAllUsers, login, logout, getUserById, googleLogin, updatedUserRoleById } from "../controllers/Users";
+import { register, deleteUserById, getAllUsers, login, logout, getUserById, googleLogin, updatedUserRoleById, getUserDetails } from "../controllers/Users";
 import { requireAdminAuth } from "../middlewares/requireAuth";
 
 const router = express.Router();
 
+router.get("/userDetails", getUserDetails);
 router.post("/register", register);
 router.post("/login", login);
 router.post("/logout", logout);

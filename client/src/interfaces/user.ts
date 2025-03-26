@@ -37,3 +37,11 @@ export interface IGoogleLoginPayload {
 }
 
 export type TRole = "basic" | "admin" | "pro";
+
+export interface IUserDetails {
+  message: string
+  user: {
+    _id: string
+    role: TRole
+  }
+}

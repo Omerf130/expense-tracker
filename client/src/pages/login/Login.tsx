@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Login.scss";
 import { ILoginForm } from "../../interfaces/user";
-import { googleLoginUser, loginUser } from "../../services/api/user";
+import { getUserDetails, googleLoginUser, loginUser } from "../../services/api/user";
 import { useNavigate, useOutletContext } from "react-router";
 import { OutletContext } from "../../interfaces/global";
 import { getTokenAndPayload } from "../../utils/utils";
@@ -19,9 +19,11 @@ const Login = () => {
     e.preventDefault();
     try {
       await loginUser(loginForm);
-      const { token, userPayload } = getTokenAndPayload();
-      if (token) {
-        setAuth({token, userPayload});
+      // const { token, userPayload } = getTokenAndPayload();
+      const userDetails = await getUserDetails();
+      console.log(userDetails)
+      if (userDetails?.user._id) {
+        // setAuth({token, userPayload});
         navigate("/myExpenses");
       }
       toast.success("User Logged in Successfuly ")

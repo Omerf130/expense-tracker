@@ -1,5 +1,5 @@
 import axios from "axios";
-import { IGoogleLoginPayload, ILoginForm, IRegisterForm, IUserResponse, IUsersResponse, TRole } from "../../interfaces/user";
+import { IGoogleLoginPayload, ILoginForm, IRegisterForm, IUserDetails, IUserResponse, IUsersResponse, TRole } from "../../interfaces/user";
 import { getTokenAndPayload } from "../../utils/utils";
 
 const BASE_URL = `${import.meta.env.VITE_API_URL}/api/users`;
@@ -72,7 +72,7 @@ export const deleteUserById = async (id: string) => {
     return res.data as IUsersResponse
     
   } catch (error) {
-    console.log(error)
+    console.error(error)
   }
 }
 
@@ -84,6 +84,19 @@ export const updatedUserRoleById = async (role: TRole, id: string) => {
     return true;
     
   } catch (error) {
-    console.log(error)
+    console.error(error)
+  }
+}
+
+export const getUserDetails = async () => {
+  try {
+    const res = await axios.get(`${BASE_URL}/userDetails`, {
+      withCredentials: true, // ✅ Important: allows cookies to be sent
+    });
+   return res.data as IUserDetails
+    
+  } catch (error) {
+    console.error(error);
+    
   }
 }

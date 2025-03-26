@@ -81,8 +81,8 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
     res
       .cookie("authToken", token, {
-        httpOnly: false,                 // Prevent client-side access
-        secure: isProduction,           // Secure cookies for HTTPS (Vercel)
+        httpOnly: isProduction, // Prevent client-side access
+        secure: isProduction, // Secure cookies for HTTPS (Vercel)
         sameSite: isProduction ? "none" : "strict", // Cross-origin support on Vercel
         maxAge: 24 * 60 * 60 * 1000,
       })
@@ -183,17 +183,33 @@ export const deleteUserById = async (req: Request, res: Response) => {
 
 export const updatedUserRoleById = async (req: Request, res: Response) => {
   const { id } = req.params;
-  const {role} = req.body; 
+  const { role } = req.body;
 
   try {
-    const updateRole = await User.findByIdAndUpdate(id, {role});
-    if(!updateRole) {
-      res.status(404).json({message:"User not found"});
+    const updateRole = await User.findByIdAndUpdate(id, { role });
+    if (!updateRole) {
+      res.status(404).json({ message: "User not found" });
       return;
     }
 
-    res.status(200).json({message: "User role updated successfully"});
+    res.status(200).json({ message: "User role updated successfully" });
   } catch (error) {
-    res.status(400).json({message: error})
+    res.status(400).json({ message: error });
+  }
+};
+
+export const getUserDetails = async (req: Request, res: Response) => {
+  const token = req.cookies.authToken;
+  if (!token) {
+    res.status(401).json({ message: "Authorization required" });
+    return;
+  }
+
+  try {
+    //@ts-ignore
+    const { role, _id } = jwt.verify(token, "dsajdjksadkjsahdas");
+    res.status(200).json({ message: "User Online", user: { role, _id } });
+  } catch (error) {
+    res.status(401).json({ message: error });
   }
 };
