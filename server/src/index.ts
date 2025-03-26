@@ -16,7 +16,7 @@ app.use(
   cors({
     origin: ["http://localhost:5173", "http://localhost:5174","https://expense-tracker-client-eight-sooty.vercel.app"],
     credentials: true,
-    methods:["GET", "POST", "PUT", "DELETE"],
+    methods:["GET", "POST", "PUT", "DELETE", "PATCH"],
     allowedHeaders:["Content-Type", "Authorization"]
   })
 );
