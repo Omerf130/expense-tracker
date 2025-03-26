@@ -81,7 +81,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
 
     res
       .cookie("authToken", token, {
-        httpOnly: isProduction,                 // Prevent client-side access
+        httpOnly: false,                 // Prevent client-side access
         secure: isProduction,           // Secure cookies for HTTPS (Vercel)
         sameSite: isProduction ? "none" : "strict", // Cross-origin support on Vercel
         maxAge: 24 * 60 * 60 * 1000,
