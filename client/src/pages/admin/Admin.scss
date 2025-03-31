@@ -1,5 +1,5 @@
 .admin-container {
-  display: flex;
+display: flex;
   flex-direction: column;
   width: 100%;
   padding: 20px 60px;
@@ -52,6 +52,27 @@
           align-items: center;
         }
       }
+    }
+  }
+  &.mobile-view {
+    padding: 20px 15px !important;
+    .admin-users-list {
+      .list-item:first-child {
+       display: none;
+      }
+      .list-item {
+        gap: 20px;
+        .user-username,
+        .user-date,
+        .user-firstname,
+        .user-lastname {
+          display: none;
+        }
+        .user-email {
+          font-size: 14px;
+        }
+      }
+     
     }
   }
 }

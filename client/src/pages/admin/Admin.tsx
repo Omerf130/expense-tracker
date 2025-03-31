@@ -6,8 +6,12 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 
 const Admin = () => {
   const [users, setUsers] = useState<IUser[] | null>(null);
+  const [userWidth, setUserWidth] = useState(0);
+
   useEffect(() => {
     fetchUsers();
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
   }, []);
 
   const fetchUsers = async () => {
@@ -33,8 +37,12 @@ const Admin = () => {
     updatedUserRoleById(e.target.value as TRole , id)
   }
 
+  const handleResize = () => {
+    setUserWidth(window.innerWidth)
+  }
+
   return (
-    <div className="admin-container">
+    <div className={`admin-container ${userWidth <= 800 ? "mobile-view" : ""}`}>
       <div className="admin-header">Users</div>
       <div className="admin-users-list">
         <div className="list-item">

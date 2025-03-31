@@ -21,13 +21,14 @@ ChartJS.register(
 
 export const options = {
   responsive: true,
+  maintainAspectRatio: false,
   plugins: {
     legend: {
       position: 'top' as const,
     },
     title: {
       display: true,
-      text: 'Chart.js Bar Chart',
+      text: '',
     },
   },
 };

@@ -189,15 +189,18 @@ const Nav = ({
                 <SiGnuprivacyguard fontSize={24} />
                 <span> {t("NAV.LINK_REGISTER")}</span>
               </NavLink>
-              <NavLink
-                to="/analytics"
-                className={({ isActive }) =>
-                  isActive ? "nav-link active" : "nav-link"
-                }
-              >
-                <IoStatsChartSharp fontSize={24} />
-                <span> {t("NAV.ANALYTICS")}</span>
-              </NavLink>
+              {(auth.userPayload?.role === "admin" ||
+                auth.userPayload?.role === "pro") && (
+                <NavLink
+                  to="/analytics"
+                  className={({ isActive }) =>
+                    isActive ? "nav-link active" : "nav-link"
+                  }
+                >
+                  <IoStatsChartSharp fontSize={24} />
+                  <span> {t("NAV.ANALYTICS")}</span>
+                </NavLink>
+              )}
             </>
           )}
         </div>

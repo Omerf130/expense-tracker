@@ -324,3 +324,20 @@
     }
   }
 }
+
+@media screen and (max-width:640px) {
+  .my-stats-container {
+
+    .my-stats-total {
+      flex-direction: column;
+      gap: 40px !important;
+      
+      .total-left {
+        align-items: center;
+      }
+    }
+    .my-stats-list {
+      flex-wrap: wrap;
+    }
+  }
+}
